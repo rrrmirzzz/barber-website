@@ -150,22 +150,22 @@ nav {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(7, 220px);
+    grid-template-columns: repeat(7, 280px);
     gap: 2rem;
     padding: 2rem;
     justify-content: center;
-    max-width: 1800px;
+    max-width: 2100px;
     margin: 0 auto;
 }
 
 .service-card {
     background: linear-gradient(165deg, #1a1a1a, #0a0a0a);
-    padding: 2rem 1.5rem;
+    padding: 1.5rem;
     border-radius: 15px;
     text-align: center;
     transition: all 0.3s;
-    min-width: 220px;
-    min-height: 320px;
+    min-width: 280px;
+    height: 400px;
     display: grid;
     grid-template-rows: auto 1fr auto;
     position: relative;
@@ -216,35 +216,45 @@ nav {
 }
 
 .price {
-    font-size: 2rem;
-    font-weight: 800;
+    font-size: 2.8rem;
+    font-weight: 900;
     color: var(--accent-color);
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    text-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.7),
+        0 0 40px rgba(0, 255, 0, 0.4);
     position: absolute;
     font-family: 'Arial', sans-serif;
+    -webkit-text-stroke: 1px var(--accent-color);
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    line-height: 1;
 }
 
 .price-top {
-    top: 15px;
-    left: 15px;
+    top: 10px;
+    left: 10px;
+    transform: rotate(-5deg);
 }
 
 .price-bottom {
-    bottom: 15px;
-    right: 15px;
-    transform: rotate(180deg);
+    bottom: 10px;
+    right: 10px;
+    transform: rotate(175deg);
 }
 
 .service-card i {
-    font-size: 3.5rem;
+    font-size: 3.8rem;
     color: var(--accent-color);
-    margin: 1.5rem 0;
-    text-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    margin: 3.5rem 0 1rem;
+    text-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.7),
+        0 0 40px rgba(0, 255, 0, 0.4);
 }
 
 .service-card h3 {
-    font-size: 1.4rem;
-    margin: 1rem 0;
+    font-size: 1.6rem;
+    margin: 0.5rem 0;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: var(--text-color);
@@ -253,27 +263,28 @@ nav {
 
 .service-card p {
     color: var(--gray-light);
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin-bottom: 1rem;
 }
 
 .duration {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--accent-color);
     background: rgba(0, 255, 0, 0.1);
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1rem;
     border-radius: 4px;
     margin-top: auto;
     border: 1px solid rgba(0, 255, 0, 0.2);
     text-transform: uppercase;
     letter-spacing: 1px;
     width: 100%;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 }
 
 /* Responsive adjustments */
 @media (max-width: 1800px) {
     .services-grid {
-        grid-template-columns: repeat(7, 220px);
+        grid-template-columns: repeat(7, 280px);
         justify-content: start;
         overflow-x: auto;
         padding: 2rem;
