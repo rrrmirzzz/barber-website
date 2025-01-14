@@ -13,14 +13,11 @@
 }
 
 /* Base link styles */
-a {
+a, a:link, a:visited, a:hover, a:active, a:focus {
     text-decoration: none;
     color: inherit;
     -webkit-tap-highlight-color: transparent;
-}
-
-a:hover, a:focus, a:active {
-    text-decoration: none;
+    -webkit-touch-callout: none;
     outline: none;
 }
 
@@ -1522,5 +1519,42 @@ section {
     .contact-card,
     .google-reviews {
         margin: 0;
+    }
+}
+
+/* Enhanced link styling for all devices */
+a, a:link, a:visited, a:hover, a:active, a:focus {
+    text-decoration: none;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    outline: none;
+}
+
+/* Mobile specific link styling */
+@media (max-width: 768px) {
+    .nav-links a,
+    .cta-button,
+    .review-button,
+    .instagram-link,
+    .contact-card a {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+        text-decoration: none;
+        outline: none;
+    }
+
+    .nav-links.active {
+        display: flex;
+        border-top: 1px solid var(--accent-color);
+    }
+
+    .nav-links a:active,
+    .cta-button:active,
+    .review-button:active,
+    .instagram-link:active {
+        background: transparent;
     }
 } 
