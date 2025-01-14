@@ -498,71 +498,77 @@
             document.addEventListener('DOMContentLoaded', function() {
                 const musicToggle = document.getElementById('music-toggle');
                 const backgroundMusic = document.getElementById('background-music');
-                const icon = musicToggle.querySelector('i');
-                let isPlaying = false;
+                const volumeIcon = musicToggle.querySelector('i');
                 let audioContext = null;
                 let analyser = null;
 
-                // Initialize audio context and set up visualizer
-                async function initAudio() {
+                // Set initial volume
+                backgroundMusic.volume = 0.5;
+
+                // Function to initialize audio context
+                function initAudioContext() {
                     if (!audioContext) {
                         audioContext = new (window.AudioContext || window.webkitAudioContext)();
                         analyser = audioContext.createAnalyser();
                         const source = audioContext.createMediaElementSource(backgroundMusic);
                         source.connect(analyser);
                         analyser.connect(audioContext.destination);
-                        
                         analyser.fftSize = 256;
-                        visualize();
                     }
-                    return audioContext.state === 'suspended' ? audioContext.resume() : Promise.resolve();
+                    if (audioContext.state === 'suspended') {
+                        audioContext.resume();
+                    }
                 }
 
-                // Handle music toggle
-                musicToggle.addEventListener('click', async function() {
+                // Function to handle music toggle
+                async function toggleMusic() {
                     try {
-                        await initAudio();
-                        
-                        if (isPlaying) {
-                            backgroundMusic.pause();
-                            icon.className = 'fas fa-volume-up';
-                            musicToggle.classList.remove('playing');
-                        } else {
-                            await backgroundMusic.play();
-                            icon.className = 'fas fa-volume-mute';
-                            musicToggle.classList.add('playing');
+                        if (!audioContext) {
+                            await initAudioContext();
                         }
-                        isPlaying = !isPlaying;
+
+                        if (backgroundMusic.paused) {
+                            await backgroundMusic.play();
+                            volumeIcon.className = 'fas fa-volume-up';
+                            musicToggle.classList.add('playing');
+                            visualize();
+                        } else {
+                            backgroundMusic.pause();
+                            volumeIcon.className = 'fas fa-volume-mute';
+                            musicToggle.classList.remove('playing');
+                        }
                     } catch (error) {
                         console.error('Audio playback error:', error);
-                        alert('Click again to enable audio playback');
+                        alert('Please click again to start music. This is required by your browser for a better experience.');
                     }
-                });
-
-                // Set initial volume
-                backgroundMusic.volume = 0.5;
-
-                // Audio visualization
-                function visualize() {
-                    if (!analyser) return;
-                    requestAnimationFrame(visualize);
-                    
-                    const dataArray = new Uint8Array(analyser.frequencyBinCount);
-                    analyser.getByteFrequencyData(dataArray);
-                    
-                    const average = dataArray.reduce((a, b) => a + b) / dataArray.length;
-                    
-                    document.querySelectorAll('.smoke').forEach((smoke, index) => {
-                        const scale = 1 + (average / 255);
-                        const hue = (average + index * 30) % 360;
-                        const opacity = 0.1 + (average / 512);
-                        
-                        smoke.style.transform = `scale(${scale})`;
-                        smoke.style.background = `radial-gradient(circle at center, 
-                            hsla(${hue}, 100%, 50%, ${opacity}) 0%, 
-                            rgba(0, 0, 0, 0) 70%)`;
-                    });
                 }
+
+                // Function to create visualization effect
+                function visualize() {
+                    if (!analyser || !audioContext || backgroundMusic.paused) return;
+
+                    const bufferLength = analyser.frequencyBinCount;
+                    const dataArray = new Uint8Array(bufferLength);
+                    analyser.getByteFrequencyData(dataArray);
+
+                    // Calculate average frequency
+                    const average = dataArray.reduce((a, b) => a + b) / bufferLength;
+                    
+                    // Update smoke elements based on music
+                    const smokeElements = document.querySelectorAll('.smoke');
+                    smokeElements.forEach(smoke => {
+                        const scale = 1 + (average / 512);
+                        const hue = 120 + (average / 2);
+                        smoke.style.transform = `scale(${scale})`;
+                        smoke.style.filter = `hue-rotate(${hue}deg)`;
+                        smoke.style.opacity = 0.3 + (average / 512);
+                    });
+
+                    requestAnimationFrame(visualize);
+                }
+
+                // Add click event listener
+                musicToggle.addEventListener('click', toggleMusic);
             });
         </script>
     </main>

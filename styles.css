@@ -960,15 +960,15 @@ footer {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 9999;
+    z-index: 99999999;
 }
 
 .music-button {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: rgba(26, 255, 26, 0.1);
-    border: 2px solid rgba(26, 255, 26, 0.3);
+    background: rgba(26, 255, 26, 0.15);
+    border: 2px solid rgba(26, 255, 26, 0.4);
     color: #1aff1a;
     cursor: pointer;
     display: flex;
@@ -976,17 +976,21 @@ footer {
     justify-content: center;
     font-size: 1.2rem;
     transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(26, 255, 26, 0.2);
+    box-shadow: 0 0 20px rgba(26, 255, 26, 0.3);
+    position: relative;
+    z-index: 99999999;
 }
 
 .music-button:hover {
-    background: rgba(26, 255, 26, 0.2);
-    border-color: rgba(26, 255, 26, 0.5);
+    background: rgba(26, 255, 26, 0.25);
+    border-color: rgba(26, 255, 26, 0.6);
     transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(26, 255, 26, 0.4);
 }
 
 .music-button.playing {
     animation: pulse 2s infinite;
+    background: rgba(26, 255, 26, 0.25);
 }
 
 @keyframes pulse {
