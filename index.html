@@ -58,6 +58,15 @@
                 <h1>Raul Ramirez III</h1>
                 <h2>Professional Barber Services</h2>
                 <a href="https://booksy.com/en-us/1394013_raul-ramirez-iii_barber-shop_134276_grand-prairie" target="_blank" class="cta-button">Book Your Appointment</a>
+                <div class="audio-player">
+                    <audio id="background-music" loop>
+                        <source src="audio/phonk-background.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <button id="music-toggle" class="music-button">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -436,6 +445,80 @@
                     correctLevel : QRCode.CorrectLevel.H
                 });
             };
+
+            // Audio Visualizer Setup
+            let audioContext;
+            let analyser;
+            let dataArray;
+            const smokeElements = document.querySelectorAll('.smoke');
+            
+            function initAudioVisualizer() {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                const audioElement = document.getElementById('background-music');
+                const source = audioContext.createMediaElementSource(audioElement);
+                
+                analyser.connect(audioContext.destination);
+                source.connect(analyser);
+                
+                analyser.fftSize = 256;
+                const bufferLength = analyser.frequencyBinCount;
+                dataArray = new Uint8Array(bufferLength);
+                
+                // Start the animation
+                visualize();
+            }
+            
+            function visualize() {
+                requestAnimationFrame(visualize);
+                analyser.getByteFrequencyData(dataArray);
+                
+                // Calculate average frequency
+                const average = dataArray.reduce((a, b) => a + b) / dataArray.length;
+                
+                // Update smoke elements based on audio
+                smokeElements.forEach((smoke, index) => {
+                    const scale = 1 + (average / 255);
+                    const hue = (average + index * 30) % 360;
+                    const opacity = 0.1 + (average / 512);
+                    
+                    smoke.style.transform = `scale(${scale})`;
+                    smoke.style.background = `radial-gradient(circle at center, 
+                        hsla(${hue}, 100%, 50%, ${opacity}) 0%, 
+                        rgba(0, 0, 0, 0) 70%)`;
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const musicToggle = document.getElementById('music-toggle');
+                const backgroundMusic = document.getElementById('background-music');
+                const icon = musicToggle.querySelector('i');
+                let isPlaying = false;
+
+                musicToggle.addEventListener('click', function() {
+                    if (!audioContext) {
+                        initAudioVisualizer();
+                    }
+                    
+                    if (isPlaying) {
+                        backgroundMusic.pause();
+                        icon.classList.remove('fa-volume-mute');
+                        icon.classList.add('fa-volume-up');
+                        musicToggle.classList.remove('playing');
+                    } else {
+                        backgroundMusic.play().catch(function(error) {
+                            console.log("Audio play failed:", error);
+                        });
+                        icon.classList.remove('fa-volume-up');
+                        icon.classList.add('fa-volume-mute');
+                        musicToggle.classList.add('playing');
+                    }
+                    isPlaying = !isPlaying;
+                });
+
+                // Start with volume at 50%
+                backgroundMusic.volume = 0.5;
+            });
         </script>
     </main>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>

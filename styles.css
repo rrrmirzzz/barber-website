@@ -696,16 +696,25 @@ footer {
 
 .smoke {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     background: radial-gradient(circle at center, rgba(26, 255, 26, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
     border-radius: 50%;
     animation: float 20s infinite linear;
+    transition: all 0.1s ease;
+    mix-blend-mode: screen;
+    will-change: transform, background;
 }
 
 @keyframes float {
     0% {
         transform: translateY(100vh) translateX(0) scale(1);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
         opacity: 1;
     }
     100% {
@@ -714,24 +723,25 @@ footer {
     }
 }
 
-.smoke:nth-child(2) {
-    left: 20%;
-    animation-delay: -5s;
+.smoke:nth-child(1) { left: 10%; animation-delay: 0s; }
+.smoke:nth-child(2) { left: 30%; animation-delay: -4s; }
+.smoke:nth-child(3) { left: 50%; animation-delay: -8s; }
+.smoke:nth-child(4) { left: 70%; animation-delay: -12s; }
+.smoke:nth-child(5) { left: 90%; animation-delay: -16s; }
+
+/* Mobile optimization for smoke effects */
+@media (max-width: 768px) {
+    .smoke {
+        width: 100px;
+        height: 100px;
+    }
 }
 
-.smoke:nth-child(3) {
-    left: 40%;
-    animation-delay: -10s;
-}
-
-.smoke:nth-child(4) {
-    left: 60%;
-    animation-delay: -15s;
-}
-
-.smoke:nth-child(5) {
-    left: 80%;
-    animation-delay: -20s;
+@media (max-width: 480px) {
+    .smoke {
+        width: 80px;
+        height: 80px;
+    }
 }
 
 /* Ad Container */
@@ -883,5 +893,64 @@ footer {
     .product-card,
     .contact-card {
         padding: 1rem;
+    }
+}
+
+/* Audio Player */
+.audio-player {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 1000;
+}
+
+.music-button {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.music-button:hover {
+    background: var(--accent-color);
+    color: var(--primary-color);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(26, 255, 26, 0.3);
+}
+
+.music-button.playing {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(26, 255, 26, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(26, 255, 26, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(26, 255, 26, 0);
+    }
+}
+
+@media (max-width: 768px) {
+    .audio-player {
+        bottom: 1rem;
+        left: 1rem;
+    }
+    
+    .music-button {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
     }
 } 
