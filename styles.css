@@ -232,6 +232,7 @@ nav {
     gap: 3rem;
     max-width: 1400px;
     margin: 0 auto;
+    margin-bottom: 4rem;
 }
 
 .contact-card {
@@ -239,6 +240,7 @@ nav {
     padding: 2rem;
     border: 1px solid var(--accent-color);
     transition: all 0.3s;
+    background: var(--secondary-color);
 }
 
 .contact-card:hover {
@@ -453,4 +455,19 @@ html {
         font-size: 1.1rem;
         min-width: 250px;
     }
+}
+
+.map-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    border: 1px solid var(--accent-color);
+    padding: 1rem;
+    background: var(--secondary-color);
+}
+
+.map-container iframe {
+    display: block;
+    width: 100%;
+    height: 450px;
+    border: none;
 } 
