@@ -12,14 +12,16 @@
     --gray-light: #999999;
 }
 
-/* Remove default link styling */
+/* Base link styles */
 a {
     text-decoration: none;
     color: inherit;
+    -webkit-tap-highlight-color: transparent;
 }
 
-a:hover, a:focus {
+a:hover, a:focus, a:active {
     text-decoration: none;
+    outline: none;
 }
 
 * {
@@ -178,31 +180,41 @@ nav {
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.9);
     overflow: hidden;
+    min-height: 100vh;
 }
 
 .parallax-bg {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-image: url('./images/raul-fadezz-logo.jpg');
     background-position: center;
-    background-size: 120% auto;
+    background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.8;
     z-index: -2;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    transition: transform 0.1s linear;
+    will-change: transform;
 }
 
 @media (max-width: 768px) {
     .parallax-bg {
         position: fixed;
-        background-size: cover;
+        background-size: contain;
+        background-position: center;
         height: 100vh;
-        transform: translateY(0);
+        opacity: 0.6;
+    }
+
+    .nav-links a {
+        -webkit-tap-highlight-color: transparent;
+        text-decoration: none;
+    }
+
+    .nav-links.active {
+        display: flex;
+        border-top: 1px solid var(--accent-color);
     }
 }
 
