@@ -23,6 +23,8 @@ body {
     background-color: var(--primary-color);
     color: var(--text-color);
     line-height: 1.6;
+    transform-style: preserve-3d;
+    height: 100%;
 }
 
 /* Header */
@@ -161,22 +163,24 @@ nav {
     position: relative;
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.9);
+    overflow: hidden;
 }
 
 .services-section::before {
     content: '';
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background-image: url('./images/raul-fadezz-logo.jpg');
     background-position: center;
-    background-size: contain;
+    background-size: 120% auto;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     opacity: 0.8;
     z-index: -2;
+    transform: translateZ(-1px) scale(2);
+    pointer-events: none;
 }
 
 .services-section::after {
@@ -582,6 +586,11 @@ footer {
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 40px;
+    height: 100%;
+    perspective: 1px;
+    perspective-origin: center;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /* Booking Section */
