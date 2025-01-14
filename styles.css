@@ -130,7 +130,6 @@ nav {
     background: rgba(0, 0, 0, 0.95);
     position: relative;
     z-index: 2;
-    min-height: 400px;
 }
 
 .services-section h2 {
@@ -159,9 +158,12 @@ nav {
     border-radius: 8px;
     text-align: center;
     transition: all 0.3s ease;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
     text-decoration: none;
-    min-height: 250px;
 }
 
 .service-card:hover {
@@ -180,6 +182,7 @@ nav {
     font-size: 1.4rem;
     margin-bottom: 1rem;
     font-weight: 500;
+    color: var(--text-color);
 }
 
 .service-card p {
@@ -192,6 +195,62 @@ nav {
     font-size: 2rem;
     color: var(--accent-color);
     font-weight: 700;
+    margin-top: auto;
+}
+
+/* Ad Container */
+.ad-container {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    padding: 1rem;
+    background: transparent;
+    border: none;
+    display: none; /* Hide the empty ad container */
+}
+
+@media (max-width: 1200px) {
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .service-card {
+        min-height: 250px;
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-card {
+        min-height: 200px;
+        padding: 1.5rem;
+    }
+    
+    .service-card i {
+        font-size: 2.5rem;
+    }
+    
+    .service-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .service-card .price {
+        font-size: 1.8rem;
+    }
 }
 
 /* Products Section */
