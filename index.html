@@ -204,7 +204,7 @@
             });
         });
 
-        // Smooth scrolling ONLY for internal page links
+        // Smooth scrolling for internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -237,13 +237,40 @@
             });
         });
 
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallaxBg = document.querySelector('.parallax-bg');
-            if (parallaxBg) {
-                parallaxBg.style.transform = `translateY(${scrolled * 0.4}px)`;
+        // Enhanced parallax effect
+        let ticking = false;
+        const parallaxBg = document.querySelector('.parallax-bg');
+        const servicesSection = document.querySelector('.services-section');
+
+        function updateParallax() {
+            if (!parallaxBg || !servicesSection) return;
+
+            const isMobile = window.innerWidth <= 768;
+            const rect = servicesSection.getBoundingClientRect();
+            const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+
+            if (isInView) {
+                const scrolled = window.pageYOffset;
+                const speed = isMobile ? 0.3 : 0.5;
+                const yPos = isMobile ? scrolled * speed : (rect.top * speed);
+                
+                parallaxBg.style.transform = `translate3d(0, ${yPos}px, 0)`;
+            }
+
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateParallax();
+                });
+                ticking = true;
             }
         });
+
+        window.addEventListener('resize', updateParallax);
+        updateParallax();
     </script>
 </body>
 </html> 
