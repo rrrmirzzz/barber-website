@@ -494,30 +494,76 @@
                 const backgroundMusic = document.getElementById('background-music');
                 const icon = musicToggle.querySelector('i');
                 let isPlaying = false;
+                let audioContext = null;
+                let analyser = null;
 
-                musicToggle.addEventListener('click', function() {
-                    if (!audioContext) {
-                        initAudioVisualizer();
+                // Initialize audio context on first user interaction
+                musicToggle.addEventListener('click', async function() {
+                    try {
+                        if (!audioContext) {
+                            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                            analyser = audioContext.createAnalyser();
+                            const source = audioContext.createMediaElementSource(backgroundMusic);
+                            source.connect(analyser);
+                            analyser.connect(audioContext.destination);
+                            
+                            analyser.fftSize = 256;
+                            const bufferLength = analyser.frequencyBinCount;
+                            const dataArray = new Uint8Array(bufferLength);
+                            
+                            // Start visualization
+                            visualize();
+                        }
+
+                        if (audioContext.state === 'suspended') {
+                            await audioContext.resume();
+                        }
+
+                        if (isPlaying) {
+                            backgroundMusic.pause();
+                            icon.classList.remove('fa-volume-mute');
+                            icon.classList.add('fa-volume-up');
+                            musicToggle.classList.remove('playing');
+                        } else {
+                            try {
+                                await backgroundMusic.play();
+                                icon.classList.remove('fa-volume-up');
+                                icon.classList.add('fa-volume-mute');
+                                musicToggle.classList.add('playing');
+                            } catch (error) {
+                                console.error('Audio playback failed:', error);
+                                alert('Please interact with the page first to enable audio playback.');
+                            }
+                        }
+                        isPlaying = !isPlaying;
+                    } catch (error) {
+                        console.error('Audio initialization failed:', error);
                     }
-                    
-                    if (isPlaying) {
-                        backgroundMusic.pause();
-                        icon.classList.remove('fa-volume-mute');
-                        icon.classList.add('fa-volume-up');
-                        musicToggle.classList.remove('playing');
-                    } else {
-                        backgroundMusic.play().catch(function(error) {
-                            console.log("Audio play failed:", error);
-                        });
-                        icon.classList.remove('fa-volume-up');
-                        icon.classList.add('fa-volume-mute');
-                        musicToggle.classList.add('playing');
-                    }
-                    isPlaying = !isPlaying;
                 });
 
-                // Start with volume at 50%
+                // Set initial volume
                 backgroundMusic.volume = 0.5;
+
+                function visualize() {
+                    if (!analyser) return;
+                    requestAnimationFrame(visualize);
+                    
+                    const dataArray = new Uint8Array(analyser.frequencyBinCount);
+                    analyser.getByteFrequencyData(dataArray);
+                    
+                    const average = dataArray.reduce((a, b) => a + b) / dataArray.length;
+                    
+                    document.querySelectorAll('.smoke').forEach((smoke, index) => {
+                        const scale = 1 + (average / 255);
+                        const hue = (average + index * 30) % 360;
+                        const opacity = 0.1 + (average / 512);
+                        
+                        smoke.style.transform = `scale(${scale})`;
+                        smoke.style.background = `radial-gradient(circle at center, 
+                            hsla(${hue}, 100%, 50%, ${opacity}) 0%, 
+                            rgba(0, 0, 0, 0) 70%)`;
+                    });
+                }
             });
         </script>
     </main>
