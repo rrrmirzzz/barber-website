@@ -1633,4 +1633,161 @@ a, button, input[type="button"], input[type="submit"] {
         background-color: transparent !important;
         color: inherit !important;
     }
+}
+
+/* Notifications Section */
+.notifications-section {
+    padding: 8rem 2rem;
+    background: var(--primary-color);
+    position: relative;
+}
+
+.notifications-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 15px;
+    font-weight: 300;
+}
+
+.notifications-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.notification-card {
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid var(--accent-color);
+    padding: 3rem;
+    border-radius: 4px;
+    text-align: center;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 0 0 1px rgba(26, 255, 26, 0.05);
+    transition: all 0.3s ease;
+}
+
+.notification-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(26, 255, 26, 0.2);
+}
+
+.notification-card i {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+}
+
+.notification-card h3 {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.notification-card p {
+    color: var(--gray-light);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.notification-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    position: relative;
+}
+
+.notification-form input {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(26, 255, 26, 0.2);
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.notification-form input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(26, 255, 26, 0.2);
+}
+
+.notification-form input::placeholder {
+    color: var(--gray-light);
+}
+
+.subscribe-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+.subscribe-button:hover {
+    background: var(--accent-color);
+    color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(26, 255, 26, 0.2);
+}
+
+.subscribe-button i {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+/* Mobile Responsive Design for Notifications */
+@media (max-width: 768px) {
+    .notifications-section {
+        padding: 6rem 1rem;
+    }
+
+    .notifications-section h2 {
+        font-size: 1.8rem;
+        letter-spacing: 8px;
+        margin-bottom: 3rem;
+    }
+
+    .notification-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .notification-card i {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .notification-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .notification-card p {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .subscribe-button {
+        width: 100%;
+        padding: 0.8rem 1.5rem;
+    }
 } 
