@@ -192,6 +192,9 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-decoration: none;
+    color: var(--text-color);
+    cursor: pointer;
 }
 
 .service-card i {
@@ -215,16 +218,46 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(
+        to right bottom,
+        #ffffff 0%,
+        #989898 29%,
+        #d8d8d8 67%,
+        #ffffff 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s linear infinite;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
 .service-card p {
     font-size: 0.9rem;
-    color: var(--gray-light);
+    color: #b8b8b8;
     margin-bottom: 2rem;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(
+        to right bottom,
+        #ffffff 0%,
+        #989898 29%,
+        #d8d8d8 67%,
+        #ffffff 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
 }
 
 .price {
