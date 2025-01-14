@@ -182,42 +182,53 @@ nav {
 
 .service-card {
     background: var(--primary-color);
-    padding: 2.5rem;
+    padding: 2.5rem 2rem;
     border: 1px solid var(--accent-color);
     text-align: center;
     transition: all 0.3s ease;
     position: relative;
-    height: 400px;
+    height: 380px;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
 }
 
 .service-card i {
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: var(--accent-color);
     margin-bottom: 1.5rem;
     transition: transform 0.3s ease;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .service-card h3 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     text-transform: uppercase;
     letter-spacing: 3px;
     margin-bottom: 1rem;
     font-weight: 500;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .service-card p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--gray-light);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .price {
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: var(--accent-color);
     font-weight: 700;
     letter-spacing: 2px;
@@ -230,6 +241,10 @@ nav {
     position: relative;
     transition: all 0.3s ease;
     margin-top: auto;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .service-card:hover {
@@ -267,10 +282,6 @@ nav {
     
     .service-card {
         height: 350px;
-    }
-    
-    .price {
-        font-size: 3.5rem;
     }
 }
 
