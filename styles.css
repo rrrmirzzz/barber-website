@@ -182,64 +182,78 @@ nav {
 
 .service-card {
     background: 
-        linear-gradient(45deg, 
-            rgba(0, 0, 0, 0.97) 0%, 
-            rgba(10, 10, 10, 0.98) 45%, 
+        linear-gradient(135deg, 
+            rgba(0, 0, 0, 0.99) 0%,
+            rgba(0, 0, 0, 0.95) 49%,
+            rgba(26, 255, 26, 0.15) 50%,
+            rgba(0, 0, 0, 0.95) 51%,
+            rgba(0, 0, 0, 0.99) 100%
+        ),
+        linear-gradient(45deg,
+            transparent 0%,
+            rgba(26, 255, 26, 0.03) 35%,
             rgba(26, 255, 26, 0.05) 50%,
-            rgba(10, 10, 10, 0.98) 55%, 
-            rgba(0, 0, 0, 0.97) 100%
+            rgba(26, 255, 26, 0.03) 65%,
+            transparent 100%
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 4px,
+            rgba(26, 255, 26, 0.02) 4px,
+            rgba(26, 255, 26, 0.02) 5px
         ),
         repeating-linear-gradient(
             45deg,
             transparent,
-            transparent 2px,
-            rgba(26, 255, 26, 0.03) 2px,
-            rgba(26, 255, 26, 0.03) 4px
+            transparent 4px,
+            rgba(26, 255, 26, 0.02) 4px,
+            rgba(26, 255, 26, 0.02) 5px
         );
+    background-size: 100% 100%, 200% 200%, 10px 10px, 10px 10px;
+    background-position: center;
     background-color: var(--primary-color);
     box-shadow: 
         inset 0 0 50px rgba(26, 255, 26, 0.05),
-        0 0 20px rgba(0, 0, 0, 0.5);
-    padding: 2.5rem 2rem;
-    border: 1px solid var(--accent-color);
-    text-align: center;
-    transition: all 0.3s ease;
+        inset 0 0 100px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(0, 0, 0, 0.8);
     position: relative;
-    height: 380px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: var(--text-color);
-    cursor: pointer;
-    box-shadow: inset 0 0 30px rgba(26, 255, 26, 0.1);
+    overflow: hidden;
 }
 
 .service-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
     background: 
-        repeating-linear-gradient(
-            135deg,
-            transparent,
-            transparent 10px,
-            rgba(26, 255, 26, 0.02) 10px,
-            rgba(26, 255, 26, 0.02) 20px
+        radial-gradient(
+            circle at center,
+            transparent 30%,
+            rgba(26, 255, 26, 0.03) 60%,
+            transparent 70%
         ),
-        repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 10px,
-            rgba(255, 255, 255, 0.01) 10px,
-            rgba(255, 255, 255, 0.01) 20px
+        repeating-conic-gradient(
+            from 0deg,
+            rgba(26, 255, 26, 0) 0deg,
+            rgba(26, 255, 26, 0.01) 1deg,
+            rgba(26, 255, 26, 0) 2deg
         );
+    animation: rotate 20s linear infinite;
     pointer-events: none;
-    border-radius: inherit;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .service-card i {
@@ -395,51 +409,78 @@ nav {
     border: 1px solid var(--accent-color);
     transition: all 0.3s;
     background: 
-        linear-gradient(45deg, 
-            rgba(0, 0, 0, 0.97) 0%, 
-            rgba(10, 10, 10, 0.98) 45%, 
+        linear-gradient(135deg, 
+            rgba(0, 0, 0, 0.99) 0%,
+            rgba(0, 0, 0, 0.95) 49%,
+            rgba(26, 255, 26, 0.15) 50%,
+            rgba(0, 0, 0, 0.95) 51%,
+            rgba(0, 0, 0, 0.99) 100%
+        ),
+        linear-gradient(45deg,
+            transparent 0%,
+            rgba(26, 255, 26, 0.03) 35%,
             rgba(26, 255, 26, 0.05) 50%,
-            rgba(10, 10, 10, 0.98) 55%, 
-            rgba(0, 0, 0, 0.97) 100%
+            rgba(26, 255, 26, 0.03) 65%,
+            transparent 100%
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 4px,
+            rgba(26, 255, 26, 0.02) 4px,
+            rgba(26, 255, 26, 0.02) 5px
         ),
         repeating-linear-gradient(
             45deg,
             transparent,
-            transparent 2px,
-            rgba(26, 255, 26, 0.03) 2px,
-            rgba(26, 255, 26, 0.03) 4px
+            transparent 4px,
+            rgba(26, 255, 26, 0.02) 4px,
+            rgba(26, 255, 26, 0.02) 5px
         );
+    background-size: 100% 100%, 200% 200%, 10px 10px, 10px 10px;
+    background-position: center;
     background-color: var(--primary-color);
     box-shadow: 
         inset 0 0 50px rgba(26, 255, 26, 0.05),
-        0 0 20px rgba(0, 0, 0, 0.5);
+        inset 0 0 100px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(0, 0, 0, 0.8);
     position: relative;
+    overflow: hidden;
 }
 
 .contact-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
     background: 
-        repeating-linear-gradient(
-            135deg,
-            transparent,
-            transparent 10px,
-            rgba(26, 255, 26, 0.02) 10px,
-            rgba(26, 255, 26, 0.02) 20px
+        radial-gradient(
+            circle at center,
+            transparent 30%,
+            rgba(26, 255, 26, 0.03) 60%,
+            transparent 70%
         ),
-        repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 10px,
-            rgba(255, 255, 255, 0.01) 10px,
-            rgba(255, 255, 255, 0.01) 20px
+        repeating-conic-gradient(
+            from 0deg,
+            rgba(26, 255, 26, 0) 0deg,
+            rgba(26, 255, 26, 0.01) 1deg,
+            rgba(26, 255, 26, 0) 2deg
         );
+    animation: rotate 20s linear infinite;
     pointer-events: none;
-    border-radius: inherit;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .contact-card:hover {
@@ -584,60 +625,93 @@ html {
     padding: 4rem;
     border: 2px solid var(--accent-color);
     background: 
-        linear-gradient(45deg, 
-            rgba(0, 0, 0, 0.97) 0%, 
-            rgba(10, 10, 10, 0.98) 45%, 
+        linear-gradient(135deg, 
+            rgba(0, 0, 0, 0.99) 0%,
+            rgba(0, 0, 0, 0.95) 49%,
+            rgba(26, 255, 26, 0.15) 50%,
+            rgba(0, 0, 0, 0.95) 51%,
+            rgba(0, 0, 0, 0.99) 100%
+        ),
+        linear-gradient(45deg,
+            transparent 0%,
+            rgba(26, 255, 26, 0.03) 35%,
             rgba(26, 255, 26, 0.05) 50%,
-            rgba(10, 10, 10, 0.98) 55%, 
-            rgba(0, 0, 0, 0.97) 100%
+            rgba(26, 255, 26, 0.03) 65%,
+            transparent 100%
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 4px,
+            rgba(26, 255, 26, 0.02) 4px,
+            rgba(26, 255, 26, 0.02) 5px
         ),
         repeating-linear-gradient(
             45deg,
             transparent,
-            transparent 2px,
-            rgba(26, 255, 26, 0.03) 2px,
-            rgba(26, 255, 26, 0.03) 4px
+            transparent 4px,
+            rgba(26, 255, 26, 0.02) 4px,
+            rgba(26, 255, 26, 0.02) 5px
         );
     background-color: var(--primary-color);
     box-shadow: 
         inset 0 0 50px rgba(26, 255, 26, 0.05),
-        0 0 20px rgba(0, 0, 0, 0.5);
+        inset 0 0 100px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(0, 0, 0, 0.8);
     transition: all 0.3s ease;
     box-shadow: inset 0 0 30px rgba(26, 255, 26, 0.1);
     border-radius: 4px;
     position: relative;
+    overflow: hidden;
 }
 
 .google-reviews::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
     background: 
-        repeating-linear-gradient(
-            135deg,
-            transparent,
-            transparent 10px,
-            rgba(26, 255, 26, 0.02) 10px,
-            rgba(26, 255, 26, 0.02) 20px
+        radial-gradient(
+            circle at center,
+            transparent 30%,
+            rgba(26, 255, 26, 0.03) 60%,
+            transparent 70%
         ),
-        repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 10px,
-            rgba(255, 255, 255, 0.01) 10px,
-            rgba(255, 255, 255, 0.01) 20px
+        repeating-conic-gradient(
+            from 0deg,
+            rgba(26, 255, 26, 0) 0deg,
+            rgba(26, 255, 26, 0.01) 1deg,
+            rgba(26, 255, 26, 0) 2deg
         );
+    animation: rotate 20s linear infinite;
     pointer-events: none;
-    border-radius: inherit;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .google-reviews:hover {
     transform: translateY(-8px);
-    box-shadow: 0 0 40px rgba(26, 255, 26, 0.2),
-                inset 0 0 50px rgba(26, 255, 26, 0.15);
+    box-shadow: 
+        inset 0 0 70px rgba(26, 255, 26, 0.1),
+        inset 0 0 150px rgba(0, 0, 0, 0.7),
+        0 10px 40px rgba(0, 0, 0, 0.9),
+        0 0 30px rgba(26, 255, 26, 0.2);
+}
+
+.google-reviews:hover::before {
+    opacity: 0.8;
+    animation: rotate 15s linear infinite;
 }
 
 .google-reviews h3 {
