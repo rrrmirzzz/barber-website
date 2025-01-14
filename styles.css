@@ -1,5 +1,5 @@
-/* Import Cormorant Unicase Font */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@400;500;600;700&display=swap');
+/* Import Oswald Font */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
 
 /* Base Styles */
 :root {
@@ -19,7 +19,7 @@
 }
 
 body {
-    font-family: 'Cormorant Unicase', serif;
+    font-family: 'Oswald', sans-serif;
     background-color: var(--primary-color);
     color: var(--text-color);
     line-height: 1.4;
@@ -55,7 +55,7 @@ nav {
     font-size: 2.2rem;
     font-weight: 900;
     color: var(--text-color);
-    letter-spacing: 2px;
+    letter-spacing: 4px;
     text-transform: uppercase;
     -webkit-text-stroke: 2px var(--accent-color);
     text-shadow: 
@@ -65,15 +65,15 @@ nav {
         1px 1px 0 var(--accent-color),
         0 0 15px rgba(224, 229, 255, 0.7),
         0 0 30px rgba(224, 229, 255, 0.4);
-    font-family: 'Cormorant Unicase', serif;
+    font-family: 'Oswald', sans-serif;
 }
 
 .logo .title {
     font-size: 1.1rem;
     color: var(--accent-color);
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    font-family: 'Cormorant Unicase', serif;
+    font-family: 'Oswald', sans-serif;
 }
 
 .nav-links {
@@ -90,10 +90,11 @@ nav {
     transition: all 0.3s;
     padding: 0.5rem 1rem;
     border-radius: 4px;
-    font-family: 'Cormorant Unicase', serif;
+    font-family: 'Oswald', sans-serif;
     text-shadow: 
         0 0 10px rgba(224, 229, 255, 0.6),
         0 0 20px rgba(224, 229, 255, 0.3);
+    font-weight: 500;
 }
 
 .nav-links a:hover {
@@ -138,11 +139,11 @@ nav {
     color: var(--primary-color);
     text-decoration: none;
     border-radius: 4px;
-    font-weight: bold;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     transition: all 0.3s;
-    font-family: 'Cormorant Unicase', serif;
+    font-family: 'Oswald', sans-serif;
 }
 
 .cta-button:hover {
@@ -163,8 +164,9 @@ nav {
     margin-bottom: 3rem;
     color: var(--accent-color);
     text-transform: uppercase;
-    letter-spacing: 6px;
-    font-family: 'Cormorant Unicase', serif;
+    letter-spacing: 8px;
+    font-weight: 700;
+    font-family: 'Oswald', sans-serif;
     -webkit-text-stroke: 2px var(--accent-color);
     text-shadow: 
         -2px -2px 0 var(--accent-color),
@@ -231,14 +233,14 @@ nav {
     letter-spacing: 1px;
     font-weight: 500;
     text-shadow: 0 0 10px rgba(168, 181, 255, 0.5);
-    font-family: 'Cormorant Unicase', serif;
+    font-family: 'Oswald', sans-serif;
     padding: 0 1rem;
     line-height: 1.4;
 }
 
 .price {
     font-size: 6.5rem;
-    font-weight: 900;
+    font-weight: 700;
     color: var(--accent-color);
     text-shadow: 
         -2px -2px 0 var(--accent-color),
@@ -248,7 +250,7 @@ nav {
         0 0 25px rgba(224, 229, 255, 0.8),
         0 0 45px rgba(224, 229, 255, 0.5);
     position: absolute;
-    font-family: 'Cormorant Unicase', serif;
+    font-family: 'Oswald', sans-serif;
     -webkit-text-stroke: 2.5px var(--accent-color);
     padding: 0.5rem 1.5rem;
     background: rgba(0, 0, 0, 0.8);
@@ -257,7 +259,7 @@ nav {
     border: 2px solid rgba(168, 181, 255, 0.3);
     display: flex;
     align-items: center;
-    letter-spacing: 0px;
+    letter-spacing: 2px;
     z-index: 3;
     transform-origin: center;
     left: 20px;
@@ -273,7 +275,7 @@ nav {
     font-size: 0.7em;
     margin-right: 2px;
     margin-top: -0.2rem;
-    font-family: 'Cormorant Unicase', serif;
+    font-family: 'Oswald', sans-serif;
 }
 
 .price-duration {
@@ -292,6 +294,8 @@ nav {
 
 .duration {
     display: none;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
 }
 
 .service-card i {
@@ -307,7 +311,7 @@ nav {
     font-size: 2.2rem;
     margin: 0.5rem 0 1rem;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     color: var(--text-color);
     text-shadow: 
         -1px -1px 0 var(--accent-color),
@@ -315,8 +319,8 @@ nav {
         -1px 1px 0 var(--accent-color),
         1px 1px 0 var(--accent-color),
         0 0 15px rgba(224, 229, 255, 0.7);
-    font-weight: 900;
-    font-family: 'Cormorant Unicase', serif;
+    font-weight: 600;
+    font-family: 'Oswald', sans-serif;
     -webkit-text-stroke: 1.5px var(--accent-color);
 }
 
@@ -379,7 +383,7 @@ nav {
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s;
-    font-family: 'Cormorant Unicase', serif;
+    font-family: 'Oswald', sans-serif;
 }
 
 .review-button:hover {
@@ -443,7 +447,7 @@ nav {
     margin-bottom: 3rem;
     color: var(--text-color);
     text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 6px;
     text-shadow: 
         -2px -2px 0 var(--accent-color),
         2px -2px 0 var(--accent-color),
@@ -451,8 +455,8 @@ nav {
         2px 2px 0 var(--accent-color),
         0 0 20px rgba(224, 229, 255, 0.7),
         0 0 40px rgba(224, 229, 255, 0.4);
-    font-weight: 900;
-    font-family: 'Cormorant Unicase', serif;
+    font-weight: 700;
+    font-family: 'Oswald', sans-serif;
 }
 
 .contact-info {
@@ -503,21 +507,21 @@ nav {
     margin: 0;
     font-weight: 600;
     text-shadow: 0 0 10px rgba(168, 181, 255, 0.5);
-    letter-spacing: 0.5px;
-    font-family: 'Cormorant Unicase', serif;
+    letter-spacing: 1px;
+    font-family: 'Oswald', sans-serif;
 }
 
 .instagram-link {
     color: var(--accent-color);
     text-decoration: none;
     font-size: 2rem;
-    font-weight: 900;
+    font-weight: 600;
     transition: all 0.3s;
     padding: 0.8rem 1.5rem;
     border-radius: 4px;
     background: rgba(0, 255, 0, 0.1);
     border: 2px solid rgba(0, 255, 0, 0.3);
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-shadow: 
         0 0 20px rgba(168, 181, 255, 0.7),
         0 0 40px rgba(168, 181, 255, 0.4);
