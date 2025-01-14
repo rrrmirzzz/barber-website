@@ -17,4 +17,4 @@ Professional barber website featuring online booking, service information, and c
 
 ## Book an Appointment
 Visit our website to book your appointment through The Cut:
-[Book Now](https://rrrmirzzz.github.io/barber-website/) 
+[Book Now](https://rrrmirzzz.github.io/barber-website/)
