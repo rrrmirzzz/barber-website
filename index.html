@@ -199,144 +199,165 @@
                 </div>
             </div>
         </section>
-    </main>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 Raul Ramirez III - Professional Barber Services</p>
+        <section id="qr-code" class="qr-code-section">
+            <h2>Scan & Share</h2>
+            <div class="qr-code-container">
+                <div id="qrcode"></div>
+                <p>Scan to visit our website</p>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p>&copy; 2024 Raul Ramirez III - Professional Barber Services</p>
+            </div>
+        </footer>
+
+        <div class="scroll-to-top">
+            <i class="fas fa-arrow-up"></i>
         </div>
-    </footer>
 
-    <div class="scroll-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </div>
-
-    <script>
-        // Mobile menu toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-        
-        mobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                navLinks.classList.remove('active');
+        <script>
+            // Mobile menu toggle
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                navLinks.classList.toggle('active');
             });
-        });
 
-        // Smooth scrolling for internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Scroll to top button
-        const scrollBtn = document.querySelector('.scroll-to-top');
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollBtn.classList.add('show');
-            } else {
-                scrollBtn.classList.remove('show');
-            }
-        });
-
-        scrollBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Enhanced parallax effect
-        let ticking = false;
-        const parallaxBg = document.querySelector('.parallax-bg');
-        const servicesSection = document.querySelector('.services-section');
-
-        function updateParallax() {
-            if (!parallaxBg || !servicesSection) return;
-
-            const isMobile = window.innerWidth <= 768;
-            const rect = servicesSection.getBoundingClientRect();
-            const isInView = rect.top < window.innerHeight && rect.bottom > 0;
-
-            if (isInView) {
-                const scrolled = window.pageYOffset;
-                const speed = isMobile ? 0.3 : 0.5;
-                const yPos = isMobile ? scrolled * speed : (rect.top * speed);
-                
-                parallaxBg.style.transform = `translate3d(0, ${yPos}px, 0)`;
-            }
-
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    updateParallax();
+            // Close menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    navLinks.classList.remove('active');
                 });
-                ticking = true;
-            }
-        });
-
-        window.addEventListener('resize', updateParallax);
-        updateParallax();
-
-        // Notification form handling
-        const notificationForm = document.getElementById('notification-form');
-        if (notificationForm) {
-            notificationForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const name = document.getElementById('name').value;
-                const phone = document.getElementById('phone').value;
-                
-                // Format phone number
-                const formattedPhone = phone.replace(/\D/g, '');
-                
-                // Here you would typically send this data to your backend
-                console.log('Subscription data:', { name, phone: formattedPhone });
-                
-                // Show success message
-                alert('Thanks for subscribing! You will receive text notifications for updates.');
-                
-                // Clear form
-                notificationForm.reset();
             });
-        }
 
-        // Phone number formatting
-        const phoneInput = document.getElementById('phone');
-        if (phoneInput) {
-            phoneInput.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length > 0) {
-                    if (value.length <= 3) {
-                        value = value;
-                    } else if (value.length <= 6) {
-                        value = value.slice(0,3) + '-' + value.slice(3);
-                    } else {
-                        value = value.slice(0,3) + '-' + value.slice(3,6) + '-' + value.slice(6,10);
+            // Smooth scrolling for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
                     }
-                    e.target.value = value;
+                });
+            });
+
+            // Scroll to top button
+            const scrollBtn = document.querySelector('.scroll-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollBtn.classList.add('show');
+                } else {
+                    scrollBtn.classList.remove('show');
                 }
             });
-        }
-    </script>
+
+            scrollBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Enhanced parallax effect
+            let ticking = false;
+            const parallaxBg = document.querySelector('.parallax-bg');
+            const servicesSection = document.querySelector('.services-section');
+
+            function updateParallax() {
+                if (!parallaxBg || !servicesSection) return;
+
+                const isMobile = window.innerWidth <= 768;
+                const rect = servicesSection.getBoundingClientRect();
+                const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+
+                if (isInView) {
+                    const scrolled = window.pageYOffset;
+                    const speed = isMobile ? 0.3 : 0.5;
+                    const yPos = isMobile ? scrolled * speed : (rect.top * speed);
+                    
+                    parallaxBg.style.transform = `translate3d(0, ${yPos}px, 0)`;
+                }
+
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        updateParallax();
+                    });
+                    ticking = true;
+                }
+            });
+
+            window.addEventListener('resize', updateParallax);
+            updateParallax();
+
+            // Notification form handling
+            const notificationForm = document.getElementById('notification-form');
+            if (notificationForm) {
+                notificationForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('name').value;
+                    const phone = document.getElementById('phone').value;
+                    
+                    // Format phone number
+                    const formattedPhone = phone.replace(/\D/g, '');
+                    
+                    // Here you would typically send this data to your backend
+                    console.log('Subscription data:', { name, phone: formattedPhone });
+                    
+                    // Show success message
+                    alert('Thanks for subscribing! You will receive text notifications for updates.');
+                    
+                    // Clear form
+                    notificationForm.reset();
+                });
+            }
+
+            // Phone number formatting
+            const phoneInput = document.getElementById('phone');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length > 0) {
+                        if (value.length <= 3) {
+                            value = value;
+                        } else if (value.length <= 6) {
+                            value = value.slice(0,3) + '-' + value.slice(3);
+                        } else {
+                            value = value.slice(0,3) + '-' + value.slice(3,6) + '-' + value.slice(6,10);
+                        }
+                        e.target.value = value;
+                    }
+                });
+            }
+
+            // QR Code generation
+            window.onload = function() {
+                new QRCode(document.getElementById("qrcode"), {
+                    text: window.location.href,
+                    width: 200,
+                    height: 200,
+                    colorDark : "#1aff1a",
+                    colorLight : "#000000",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+            };
+        </script>
+    </main>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 </body>
 </html> 
