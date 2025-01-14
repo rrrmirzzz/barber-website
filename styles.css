@@ -153,6 +153,9 @@ nav {
     grid-template-columns: repeat(7, 220px);
     gap: 2rem;
     padding: 2rem;
+    justify-content: center;
+    max-width: 1800px;
+    margin: 0 auto;
 }
 
 .service-card {
@@ -268,7 +271,7 @@ nav {
 }
 
 /* Responsive adjustments */
-@media (max-width: 1400px) {
+@media (max-width: 1800px) {
     .services-grid {
         grid-template-columns: repeat(7, 220px);
         justify-content: start;
@@ -277,7 +280,7 @@ nav {
         margin-bottom: 1rem;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: thin;
-        scrollbar-color: var(--primary-color) #ddd;
+        scrollbar-color: var(--accent-color) var(--primary-color);
     }
 
     .services-grid::-webkit-scrollbar {
@@ -285,14 +288,14 @@ nav {
     }
 
     .services-grid::-webkit-scrollbar-track {
-        background: #ddd;
+        background: var(--primary-color);
         border-radius: 4px;
     }
 
     .services-grid::-webkit-scrollbar-thumb {
-        background: var(--primary-color);
+        background: var(--accent-color);
         border-radius: 4px;
-        border: 2px solid #ddd;
+        border: 2px solid var(--primary-color);
     }
 }
 
