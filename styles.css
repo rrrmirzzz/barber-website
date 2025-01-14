@@ -156,13 +156,15 @@ nav {
 }
 
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 280px);
-    gap: 2rem;
-    padding: 2rem;
+    display: flex;
     justify-content: center;
-    max-width: 2100px;
+    align-items: center;
+    gap: 0;
+    padding: 4rem;
+    max-width: 100%;
     margin: 0 auto;
+    overflow-x: auto;
+    min-height: 500px;
 }
 
 .service-card {
@@ -170,7 +172,7 @@ nav {
     padding: 1.5rem;
     border-radius: 15px;
     text-align: center;
-    transition: all 0.3s;
+    transition: all 0.4s ease-out;
     min-width: 280px;
     height: 400px;
     display: flex;
@@ -182,44 +184,36 @@ nav {
         0 8px 20px rgba(0, 255, 0, 0.2);
     color: var(--text-color);
     overflow: hidden;
+    margin-left: -180px;
+    transform: rotate(-2deg);
 }
 
-.service-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 50% 150%, var(--accent-color) 0%, transparent 60%),
-        repeating-linear-gradient(
-            -45deg,
-            rgba(0, 255, 0, 0.03) 0px,
-            rgba(0, 255, 0, 0.03) 2px,
-            transparent 2px,
-            transparent 4px
-        );
-    opacity: 0.2;
-    z-index: 1;
+.service-card:hover {
+    transform: translateY(-20px) rotate(0deg) !important;
+    margin-right: 20px;
+    z-index: 10;
 }
 
-.service-card::after {
-    content: '';
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    right: 4px;
-    bottom: 4px;
-    border: 1px solid rgba(0, 255, 0, 0.3);
-    border-radius: 8px;
-    z-index: 1;
-    pointer-events: none;
-}
+.service-card:nth-child(1) { margin-left: 0; transform: rotate(-4deg); }
+.service-card:nth-child(2) { transform: rotate(-2deg); }
+.service-card:nth-child(3) { transform: rotate(0deg); }
+.service-card:nth-child(4) { transform: rotate(2deg); }
+.service-card:nth-child(5) { transform: rotate(4deg); }
+.service-card:nth-child(6) { transform: rotate(6deg); }
+.service-card:nth-child(7) { transform: rotate(8deg); }
 
-.service-card > * {
-    position: relative;
-    z-index: 2;
+.service-card p {
+    color: var(--text-color);
+    font-size: 1.4rem;
+    margin: 0;
+    opacity: 0.9;
+    text-transform: none;
+    letter-spacing: 1px;
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    font-family: 'Dancing Script', cursive;
+    padding: 0 1rem;
+    line-height: 1.4;
 }
 
 .price {
@@ -296,29 +290,11 @@ nav {
     font-weight: 900;
 }
 
-.service-card p {
-    color: var(--text-color);
-    font-size: 1.2rem;
-    margin: 0;
-    opacity: 0.9;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-    padding: 0 1rem;
-}
-
 /* Responsive adjustments */
 @media (max-width: 1800px) {
     .services-grid {
-        grid-template-columns: repeat(7, 280px);
-        justify-content: start;
-        overflow-x: auto;
-        padding: 2rem;
-        margin-bottom: 1rem;
+        justify-content: flex-start;
+        padding: 4rem 2rem;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: thin;
         scrollbar-color: var(--accent-color) var(--primary-color);
@@ -611,4 +587,7 @@ html {
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap');
 
 /* Import Money Font */
-@import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap');
+
+/* Import Dreamy Font */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap'); 
