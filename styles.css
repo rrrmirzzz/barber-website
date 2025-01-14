@@ -1884,23 +1884,31 @@ a, button, input[type="button"], input[type="submit"] {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        inset 0 0 0 1px rgba(26, 255, 26, 0.05);
-    min-height: 500px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    min-height: 450px;
+    position: relative;
+    z-index: 2;
 }
 
 .product-card img {
-    width: 100%;
-    height: 300px;
-    object-fit: contain;
-    border-radius: 4px;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-    display: block;
-    margin: 0 auto;
-    border: 1px solid rgba(26, 255, 26, 0.1);
+    width: 100% !important;
+    height: 250px !important;
+    object-fit: contain !important;
+    border-radius: 4px !important;
+    background: #ffffff !important;
+    padding: 1rem !important;
+    margin: 0 auto !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+    border: none !important;
+    max-width: 100% !important;
+    position: relative !important;
+    z-index: 3 !important;
 }
 
 .product-card:hover {
