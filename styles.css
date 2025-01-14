@@ -200,24 +200,24 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1rem;
     background: rgba(0, 255, 0, 0.05);
-    padding: 0.6rem;
+    padding: 0.8rem;
     border-radius: 6px;
     margin-top: auto;
 }
 
 .price {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 800;
     color: var(--accent-color);
 }
 
 .duration {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--gray-light);
     background: rgba(255, 255, 255, 0.05);
-    padding: 0.3rem 0.6rem;
+    padding: 0.4rem 0.8rem;
     border-radius: 4px;
     letter-spacing: 1px;
     white-space: nowrap;
