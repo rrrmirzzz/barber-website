@@ -355,6 +355,21 @@ nav {
     right: 0;
     bottom: 0;
     background: 
+        linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+        url('https://source.unsplash.com/collection/8533740/1920x1080') center/cover;
+    filter: grayscale(100%);
+    opacity: 0.15;
+    z-index: 1;
+}
+
+.contact-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
         radial-gradient(circle at 50% 50%, var(--accent-color) 0%, transparent 70%),
         repeating-linear-gradient(
             -45deg,
@@ -364,7 +379,12 @@ nav {
             transparent 4px
         );
     opacity: 0.1;
-    z-index: 1;
+    z-index: 2;
+}
+
+.contact-section > * {
+    position: relative;
+    z-index: 3;
 }
 
 .contact-section h2 {
@@ -428,19 +448,22 @@ nav {
 .instagram-link {
     color: var(--accent-color);
     text-decoration: none;
-    font-size: 1.4rem;
-    font-weight: bold;
+    font-size: 1.6rem;
+    font-weight: 900;
     transition: all 0.3s;
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1.5rem;
     border-radius: 4px;
     background: rgba(0, 255, 0, 0.1);
-    border: 1px solid rgba(0, 255, 0, 0.2);
+    border: 2px solid rgba(0, 255, 0, 0.3);
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
 .instagram-link:hover {
     background: rgba(0, 255, 0, 0.2);
-    transform: translateY(-2px);
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    transform: translateY(-2px) scale(1.05);
+    text-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+    border-color: var(--accent-color);
 }
 
 .map-container {
