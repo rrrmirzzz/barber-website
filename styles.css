@@ -1,3 +1,6 @@
+/* Import Cormorant Unicase Font */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@400;500;600;700&display=swap');
+
 /* Base Styles */
 :root {
     --primary-color: #0a0a0a;
@@ -16,7 +19,7 @@
 }
 
 body {
-    font-family: 'UnifrakturMaguntia', cursive;
+    font-family: 'Cormorant Unicase', serif;
     background-color: var(--primary-color);
     color: var(--text-color);
     line-height: 1.4;
@@ -62,7 +65,7 @@ nav {
         1px 1px 0 var(--accent-color),
         0 0 15px rgba(224, 229, 255, 0.7),
         0 0 30px rgba(224, 229, 255, 0.4);
-    font-family: 'UnifrakturMaguntia', cursive;
+    font-family: 'Cormorant Unicase', serif;
 }
 
 .logo .title {
@@ -70,7 +73,7 @@ nav {
     color: var(--accent-color);
     letter-spacing: 2px;
     text-transform: uppercase;
-    font-family: 'UnifrakturMaguntia', cursive;
+    font-family: 'Cormorant Unicase', serif;
 }
 
 .nav-links {
@@ -87,7 +90,7 @@ nav {
     transition: all 0.3s;
     padding: 0.5rem 1rem;
     border-radius: 4px;
-    font-family: 'UnifrakturMaguntia', cursive;
+    font-family: 'Cormorant Unicase', serif;
     text-shadow: 
         0 0 10px rgba(224, 229, 255, 0.6),
         0 0 20px rgba(224, 229, 255, 0.3);
@@ -139,7 +142,7 @@ nav {
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s;
-    font-family: 'UnifrakturMaguntia', cursive;
+    font-family: 'Cormorant Unicase', serif;
 }
 
 .cta-button:hover {
@@ -161,7 +164,7 @@ nav {
     color: var(--accent-color);
     text-transform: uppercase;
     letter-spacing: 6px;
-    font-family: 'UnifrakturMaguntia', cursive;
+    font-family: 'Cormorant Unicase', serif;
     -webkit-text-stroke: 2px var(--accent-color);
     text-shadow: 
         -2px -2px 0 var(--accent-color),
@@ -228,7 +231,7 @@ nav {
     letter-spacing: 1px;
     font-weight: 500;
     text-shadow: 0 0 10px rgba(168, 181, 255, 0.5);
-    font-family: 'UnifrakturMaguntia', cursive;
+    font-family: 'Cormorant Unicase', serif;
     padding: 0 1rem;
     line-height: 1.4;
 }
@@ -245,7 +248,7 @@ nav {
         0 0 25px rgba(224, 229, 255, 0.8),
         0 0 45px rgba(224, 229, 255, 0.5);
     position: absolute;
-    font-family: 'UnifrakturMaguntia', cursive;
+    font-family: 'Cormorant Unicase', serif;
     -webkit-text-stroke: 2.5px var(--accent-color);
     padding: 0.5rem 1.5rem;
     background: rgba(0, 0, 0, 0.8);
@@ -270,7 +273,7 @@ nav {
     font-size: 0.7em;
     margin-right: 2px;
     margin-top: -0.2rem;
-    font-family: 'UnifrakturMaguntia', cursive;
+    font-family: 'Cormorant Unicase', serif;
 }
 
 .price-duration {
@@ -313,7 +316,7 @@ nav {
         1px 1px 0 var(--accent-color),
         0 0 15px rgba(224, 229, 255, 0.7);
     font-weight: 900;
-    font-family: 'UnifrakturMaguntia', cursive;
+    font-family: 'Cormorant Unicase', serif;
     -webkit-text-stroke: 1.5px var(--accent-color);
 }
 
@@ -376,7 +379,7 @@ nav {
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s;
-    font-family: 'UnifrakturMaguntia', cursive;
+    font-family: 'Cormorant Unicase', serif;
 }
 
 .review-button:hover {
@@ -449,7 +452,7 @@ nav {
         0 0 20px rgba(224, 229, 255, 0.7),
         0 0 40px rgba(224, 229, 255, 0.4);
     font-weight: 900;
-    font-family: 'UnifrakturMaguntia', cursive;
+    font-family: 'Cormorant Unicase', serif;
 }
 
 .contact-info {
@@ -501,7 +504,7 @@ nav {
     font-weight: 600;
     text-shadow: 0 0 10px rgba(168, 181, 255, 0.5);
     letter-spacing: 0.5px;
-    font-family: 'UnifrakturMaguntia', cursive;
+    font-family: 'Cormorant Unicase', serif;
 }
 
 .instagram-link {
@@ -613,9 +616,6 @@ html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
 }
-
-/* Import Gothic Font */
-@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
 
 /* Import additional graffiti font */
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap');
