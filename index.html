@@ -9,11 +9,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <div class="background-gallery">
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="gallery/fade1.jpg" alt="Fade haircut"></div>
+            <div class="gallery-item"><img src="gallery/fade2.jpg" alt="Fade haircut"></div>
+            <div class="gallery-item"><img src="gallery/fade3.jpg" alt="Fade haircut"></div>
+            <div class="gallery-item"><img src="gallery/fade4.jpg" alt="Fade haircut"></div>
+            <div class="gallery-item"><img src="gallery/fade5.jpg" alt="Fade haircut"></div>
+            <div class="gallery-item"><img src="gallery/fade6.jpg" alt="Fade haircut"></div>
+            <div class="gallery-item"><img src="gallery/fade7.jpg" alt="Fade haircut"></div>
+            <div class="gallery-item"><img src="gallery/fade8.jpg" alt="Fade haircut"></div>
+            <div class="gallery-item"><img src="gallery/fade9.jpg" alt="Fade haircut"></div>
+            <div class="gallery-item"><img src="gallery/fade10.jpg" alt="Fade haircut"></div>
+        </div>
+    </div>
     <header>
         <nav>
             <div class="nav-links">
                 <a href="#services">Services</a>
-                <a href="#book">Book Now</a>
+                <a href="#booking">Book Now</a>
                 <a href="#reviews">Reviews</a>
                 <a href="#contact">Contact</a>
             </div>
@@ -124,12 +138,12 @@
         </section>
 
         <section id="reviews" class="reviews-section">
-            <h2>Client Reviews</h2>
+            <h2>Experience & Reviews</h2>
             <div class="reviews-container">
                 <div class="google-reviews">
-                    <h3>Check out our Google Reviews</h3>
+                    <h3>Share Your Experience</h3>
                     <a href="https://g.co/kgs/qidMRm4" target="_blank" class="review-button">
-                        <i class="fab fa-google"></i> Read Reviews
+                        <i class="fab fa-google"></i> Leave a Review
                     </a>
                 </div>
             </div>
@@ -157,20 +171,26 @@
         });
 
         // Close menu when clicking a link
-        document.querySelectorAll('.nav-item').forEach(link => {
+        document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
                 navLinks.classList.remove('active');
             });
         });
 
-        // Smooth scrolling
+        // Smooth scrolling for all links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
