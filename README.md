@@ -7,7 +7,7 @@ Professional barber website featuring online booking, service information, and c
 - Scissors Cuts ($35 - 45 mins)
 - Beard Trim ($15 - adds 15 mins)
 - Steam Treatment ($5 - adds 5 mins)
-- Hair Color ($50+ - 2 hours)
+- Hair Color ($50+ - 1hr+)
 
 ## Contact
 - Phone: (972) 400-1002
