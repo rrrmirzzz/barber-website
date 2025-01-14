@@ -132,6 +132,7 @@ nav {
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s;
+    font-family: 'UnifrakturMaguntia', cursive;
 }
 
 .cta-button:hover {
@@ -357,6 +358,7 @@ nav {
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s;
+    font-family: 'UnifrakturMaguntia', cursive;
 }
 
 .review-button:hover {
