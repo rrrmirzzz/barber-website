@@ -208,19 +208,29 @@ nav {
     margin-bottom: 0.5rem;
 }
 
+.service-card .price-duration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
 .price {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 800;
     background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: none;
-    margin: 0.5rem 0;
+    margin: 0;
 }
 
 .duration {
     font-size: 0.9rem;
     color: #888;
+    margin: 0;
+    padding-top: 0.3rem;
 }
 
 /* Enhanced Section Headers */
