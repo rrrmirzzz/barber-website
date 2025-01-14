@@ -12,11 +12,16 @@
     <header>
         <nav>
             <div class="logo">RR III</div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <div class="nav-links">
-                <a href="#services">Services</a>
-                <a href="#booking">Book Now</a>
-                <a href="#reviews">Reviews</a>
-                <a href="#contact">Contact</a>
+                <a href="#services" class="nav-item">Services</a>
+                <a href="#booking" class="nav-item">Book Now</a>
+                <a href="#reviews" class="nav-item">Reviews</a>
+                <a href="#contact" class="nav-item">Contact</a>
             </div>
         </nav>
     </header>
@@ -125,5 +130,55 @@
             <p>&copy; 2024 Raul Ramirez III - Professional Barber Services</p>
         </div>
     </footer>
+
+    <div class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-item').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll to top button
+        const scrollBtn = document.querySelector('.scroll-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+        });
+
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html> 
