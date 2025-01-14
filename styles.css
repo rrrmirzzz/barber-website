@@ -130,6 +130,7 @@ nav {
     background: rgba(0, 0, 0, 0.95);
     position: relative;
     z-index: 2;
+    min-height: 400px;
 }
 
 .services-section h2 {
@@ -147,6 +148,8 @@ nav {
     gap: 2rem;
     max-width: 1400px;
     margin: 0 auto;
+    position: relative;
+    z-index: 3;
 }
 
 .service-card {
@@ -156,6 +159,9 @@ nav {
     border-radius: 8px;
     text-align: center;
     transition: all 0.3s ease;
+    display: block;
+    text-decoration: none;
+    min-height: 250px;
 }
 
 .service-card:hover {
