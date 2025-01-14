@@ -47,7 +47,7 @@ header {
     background: linear-gradient(to right, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.85));
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(50, 205, 50, 0.2);
-    padding: 0.5rem 0;
+    padding: 1rem 0;
     position: fixed;
     width: 100%;
     top: 0;
@@ -61,27 +61,96 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1rem;
+    padding: 0 2rem;
 }
 
 .logo {
-    font-size: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logo .name {
+    font-size: 1.8rem;
     font-weight: 800;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-shadow: 0 0 15px rgba(50, 205, 50, 0.7);
-    color: var(--accent-color);
+}
+
+.logo .title {
+    font-size: 1rem;
+    color: #888;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
 .nav-links a {
     color: var(--text-color);
     text-decoration: none;
-    margin-left: 2rem;
-    transition: color 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
 }
 
 .nav-links a:hover {
     color: var(--accent-color);
+    background: rgba(50, 205, 50, 0.1);
     text-shadow: 0 0 10px rgba(50, 205, 50, 0.5);
+}
+
+/* Mobile Menu Styles */
+@media (max-width: 768px) {
+    nav {
+        padding: 0 1rem;
+    }
+
+    .logo .name {
+        font-size: 1.4rem;
+    }
+
+    .logo .title {
+        font-size: 0.9rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.3s ease;
+        z-index: 999;
+        gap: 1.5rem;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.2rem;
+        padding: 1rem 2rem;
+        width: 80%;
+        text-align: center;
+    }
 }
 
 /* Enhanced Hero Section */
