@@ -1895,7 +1895,7 @@ a, button, input[type="button"], input[type="submit"] {
     height: 250px !important;
     object-fit: contain !important;
     border-radius: 4px !important;
-    background: #ffffff !important;
+    background: rgba(0, 0, 0, 0.95) !important;
     padding: 1rem !important;
     margin: 0 auto !important;
     display: block !important;
@@ -1903,25 +1903,18 @@ a, button, input[type="button"], input[type="submit"] {
     visibility: visible !important;
     transform: none !important;
     -webkit-transform: none !important;
-    filter: none !important;
-    -webkit-filter: none !important;
-    border: none !important;
+    filter: brightness(1.1) !important;
+    -webkit-filter: brightness(1.1) !important;
+    border: 1px solid rgba(26, 255, 26, 0.1) !important;
     max-width: 100% !important;
     position: relative !important;
     z-index: 3 !important;
 }
 
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 
-        0 15px 40px rgba(0, 0, 0, 0.5),
-        inset 0 0 0 1px rgba(26, 255, 26, 0.2);
-    border-color: var(--accent-color);
-}
-
 .product-card:hover img {
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.08);
+    filter: brightness(1.2) !important;
+    -webkit-filter: brightness(1.2) !important;
+    border-color: rgba(26, 255, 26, 0.2) !important;
 }
 
 .product-card h3 {
