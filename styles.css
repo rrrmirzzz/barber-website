@@ -89,8 +89,8 @@ nav {
     justify-content: center;
     text-align: center;
     padding: 1rem;
-    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)),
-                url('graffiti-logo.png') center/contain no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)),
+                url('graffiti-logo.png') center/80% no-repeat;
     position: relative;
     overflow: hidden;
 }
@@ -102,47 +102,59 @@ nav {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at center, 
-                rgba(50, 205, 50, 0.1) 0%,
-                rgba(0, 0, 0, 0.95) 70%);
+    background: 
+        radial-gradient(circle at center, 
+            rgba(50, 205, 50, 0.15) 0%,
+            rgba(0, 0, 0, 0.9) 70%),
+        repeating-linear-gradient(
+            45deg,
+            rgba(50, 205, 50, 0.02) 0px,
+            rgba(50, 205, 50, 0.02) 1px,
+            transparent 1px,
+            transparent 10px
+        );
     z-index: 1;
+    animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        opacity: 0.5;
+    }
+    to {
+        opacity: 0.7;
+    }
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 2rem;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 2.5rem;
     border-radius: 15px;
     border: 2px solid var(--accent-color);
     box-shadow: 
-        0 0 30px rgba(50, 205, 50, 0.2),
-        0 0 60px rgba(50, 205, 50, 0.1);
-    backdrop-filter: blur(5px);
+        0 0 30px rgba(50, 205, 50, 0.3),
+        0 0 60px rgba(50, 205, 50, 0.2),
+        inset 0 0 30px rgba(50, 205, 50, 0.1);
+    backdrop-filter: blur(10px);
+    transform: translateY(40%);
 }
 
 .hero-content h1 {
-    font-size: 4.5rem;
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    font-weight: 900;
-    text-shadow: 
-        0 0 20px rgba(50, 205, 50, 0.7),
-        0 0 40px rgba(50, 205, 50, 0.4);
-    -webkit-text-stroke: 2px var(--accent-color);
+    display: none; /* Hide the text since we have the logo */
 }
 
 .hero-content h2 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin-bottom: 2rem;
     color: var(--accent-color);
     text-transform: uppercase;
-    letter-spacing: 6px;
+    letter-spacing: 8px;
     text-shadow: 
-        0 0 10px rgba(50, 205, 50, 0.7),
-        0 0 20px rgba(50, 205, 50, 0.4);
+        0 0 15px rgba(50, 205, 50, 0.8),
+        0 0 30px rgba(50, 205, 50, 0.5);
+    font-weight: 600;
 }
 
 .cta-button {
