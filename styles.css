@@ -28,7 +28,13 @@ a, a:link, a:visited, a:hover, a:active, a:focus {
     -webkit-tap-highlight-color: transparent !important;
 }
 
-[Previous content remains exactly the same until the product-card section...]
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
 .products-section {
     padding: 4rem 2rem;
@@ -178,6 +184,4 @@ a, a:link, a:visited, a:hover, a:active, a:focus {
     .product-card img {
         height: 150px;
     }
-}
-
-[Rest of the file remains exactly the same...] 
+} 
