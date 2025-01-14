@@ -160,7 +160,7 @@ nav {
     padding: 8rem 2rem;
     position: relative;
     z-index: 1;
-    background-color: var(--primary-color);
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .services-section::before {
@@ -170,12 +170,12 @@ nav {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('images/raul-fadezz-logo.jpg');
+    background-image: url('./images/raul-fadezz-logo.jpg');
     background-position: center;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    opacity: 0.5;
+    opacity: 0.8;
     z-index: -2;
 }
 
@@ -188,8 +188,8 @@ nav {
     bottom: 0;
     background: radial-gradient(
         circle at center,
-        rgba(26, 255, 26, 0.1) 0%,
-        rgba(0, 0, 0, 0.98) 70%
+        rgba(26, 255, 26, 0.15) 0%,
+        rgba(0, 0, 0, 0.85) 70%
     );
     z-index: -1;
     pointer-events: none;
