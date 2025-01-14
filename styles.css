@@ -1082,4 +1082,218 @@ section {
 .smoke:nth-child(even) {
     animation-duration: 8s;
     animation-timing-function: ease-in-out;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    /* Header & Navigation */
+    nav {
+        padding: 0 1rem;
+        height: 40px;
+    }
+    
+    .logo .name {
+        font-size: 1rem;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.98);
+        padding: 1.5rem;
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        border-bottom: 1px solid var(--accent-color);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        font-size: 1rem;
+        padding: 0.5rem 0;
+    }
+
+    /* Services Grid */
+    .services-section {
+        padding: 6rem 1rem;
+    }
+
+    .services-section h2 {
+        font-size: 1.8rem;
+        letter-spacing: 8px;
+        margin-bottom: 3rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        gap: 1.5rem;
+        padding: 0;
+    }
+
+    .service-card {
+        height: auto;
+        padding: 2rem 1.5rem;
+        background-size: 100% 100%, 150% 150%, 8px 8px, 8px 8px;
+    }
+
+    .service-card i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+        margin-bottom: 0.8rem;
+    }
+
+    .service-card p {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .price {
+        font-size: 3rem;
+        padding: 0.3rem 1rem;
+    }
+
+    /* Contact Section */
+    .contact-section {
+        padding: 6rem 1rem;
+    }
+
+    .contact-section h2 {
+        font-size: 1.8rem;
+        letter-spacing: 8px;
+        margin-bottom: 3rem;
+    }
+
+    .contact-info {
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .contact-card {
+        padding: 1.5rem;
+    }
+
+    .contact-card i {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .contact-card p {
+        font-size: 0.9rem;
+    }
+
+    /* Reviews Section */
+    .reviews-section {
+        padding: 6rem 1rem;
+    }
+
+    .reviews-section h2 {
+        font-size: 1.8rem;
+        letter-spacing: 8px;
+    }
+
+    .google-reviews {
+        padding: 2rem 1rem;
+    }
+
+    .google-reviews h3 {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        margin-bottom: 2rem;
+    }
+
+    .stars-container {
+        gap: 0.3rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .stars-container i {
+        font-size: 1.5rem;
+    }
+
+    .review-button {
+        padding: 1.2rem 2rem;
+        font-size: 1rem;
+        letter-spacing: 2px;
+        min-width: auto;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    /* Background Effects */
+    .smoke {
+        width: 100px;
+        height: 100px;
+    }
+
+    .smoke:nth-child(1) { width: 140px; height: 140px; }
+    .smoke:nth-child(2) { width: 120px; height: 120px; }
+    .smoke:nth-child(3) { width: 160px; height: 160px; }
+    .smoke:nth-child(4) { width: 130px; height: 130px; }
+    .smoke:nth-child(5) { width: 150px; height: 150px; }
+
+    /* Animations */
+    @keyframes fire {
+        0% {
+            transform: translateY(0) scale(1) rotate(0deg);
+            opacity: 0;
+        }
+        50% {
+            transform: translateY(-40px) scale(1.2) rotate(-3deg);
+            opacity: 0.2;
+        }
+        100% {
+            transform: translateY(-80px) scale(1.4) rotate(3deg);
+            opacity: 0;
+        }
+    }
+
+    .service-card:hover,
+    .contact-card:hover,
+    .google-reviews:hover {
+        transform: translateY(-5px);
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    .services-section h2,
+    .contact-section h2,
+    .reviews-section h2 {
+        font-size: 1.5rem;
+        letter-spacing: 5px;
+    }
+
+    .service-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .price {
+        font-size: 2.5rem;
+    }
+
+    .contact-card {
+        padding: 1.2rem;
+    }
+
+    .google-reviews {
+        padding: 1.5rem 1rem;
+    }
+
+    .review-button {
+        padding: 1rem 1.5rem;
+        font-size: 0.9rem;
+    }
 } 
