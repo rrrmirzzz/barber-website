@@ -158,15 +158,9 @@ nav {
 /* Services Section */
 .services-section {
     padding: 8rem 2rem;
-    background: 
-        linear-gradient(
-            rgba(0, 0, 0, 0.85),
-            rgba(0, 0, 0, 0.85)
-        ),
-        url('images/raul-fadezz-logo.jpg') center/cover no-repeat;
     position: relative;
     z-index: 1;
-    background-attachment: fixed;
+    background-color: var(--primary-color);
 }
 
 .services-section::before {
@@ -176,10 +170,26 @@ nav {
     left: 0;
     right: 0;
     bottom: 0;
+    background-image: url('images/raul-fadezz-logo.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 0.5;
+    z-index: -2;
+}
+
+.services-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: radial-gradient(
         circle at center,
-        rgba(26, 255, 26, 0.08) 0%,
-        rgba(0, 0, 0, 0.95) 70%
+        rgba(26, 255, 26, 0.1) 0%,
+        rgba(0, 0, 0, 0.98) 70%
     );
     z-index: -1;
     pointer-events: none;
