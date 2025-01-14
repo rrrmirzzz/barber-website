@@ -158,7 +158,30 @@ nav {
 /* Services Section */
 .services-section {
     padding: 8rem 2rem;
-    background: rgba(10, 10, 10, 0.95);
+    background: 
+        linear-gradient(
+            rgba(10, 10, 10, 0.97),
+            rgba(10, 10, 10, 0.97)
+        ),
+        url('../images/raul-fadezz-logo.jpg') center/cover no-repeat fixed;
+    position: relative;
+    z-index: 1;
+}
+
+.services-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at center,
+        rgba(26, 255, 26, 0.03) 0%,
+        rgba(10, 10, 10, 0.98) 70%
+    );
+    z-index: -1;
+    pointer-events: none;
 }
 
 .services-section h2 {
