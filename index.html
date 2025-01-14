@@ -503,53 +503,46 @@
                 let audioContext = null;
                 let analyser = null;
 
-                // Initialize audio context on first user interaction
+                // Initialize audio context and set up visualizer
+                async function initAudio() {
+                    if (!audioContext) {
+                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                        analyser = audioContext.createAnalyser();
+                        const source = audioContext.createMediaElementSource(backgroundMusic);
+                        source.connect(analyser);
+                        analyser.connect(audioContext.destination);
+                        
+                        analyser.fftSize = 256;
+                        visualize();
+                    }
+                    return audioContext.state === 'suspended' ? audioContext.resume() : Promise.resolve();
+                }
+
+                // Handle music toggle
                 musicToggle.addEventListener('click', async function() {
                     try {
-                        if (!audioContext) {
-                            audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                            analyser = audioContext.createAnalyser();
-                            const source = audioContext.createMediaElementSource(backgroundMusic);
-                            source.connect(analyser);
-                            analyser.connect(audioContext.destination);
-                            
-                            analyser.fftSize = 256;
-                            const bufferLength = analyser.frequencyBinCount;
-                            const dataArray = new Uint8Array(bufferLength);
-                            
-                            // Start visualization
-                            visualize();
-                        }
-
-                        if (audioContext.state === 'suspended') {
-                            await audioContext.resume();
-                        }
-
+                        await initAudio();
+                        
                         if (isPlaying) {
                             backgroundMusic.pause();
-                            icon.classList.remove('fa-volume-mute');
-                            icon.classList.add('fa-volume-up');
+                            icon.className = 'fas fa-volume-up';
                             musicToggle.classList.remove('playing');
                         } else {
-                            try {
-                                await backgroundMusic.play();
-                                icon.classList.remove('fa-volume-up');
-                                icon.classList.add('fa-volume-mute');
-                                musicToggle.classList.add('playing');
-                            } catch (error) {
-                                console.error('Audio playback failed:', error);
-                                alert('Please interact with the page first to enable audio playback.');
-                            }
+                            await backgroundMusic.play();
+                            icon.className = 'fas fa-volume-mute';
+                            musicToggle.classList.add('playing');
                         }
                         isPlaying = !isPlaying;
                     } catch (error) {
-                        console.error('Audio initialization failed:', error);
+                        console.error('Audio playback error:', error);
+                        alert('Click again to enable audio playback');
                     }
                 });
 
                 // Set initial volume
                 backgroundMusic.volume = 0.5;
 
+                // Audio visualization
                 function visualize() {
                     if (!analyser) return;
                     requestAnimationFrame(visualize);
