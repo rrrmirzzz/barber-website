@@ -83,32 +83,66 @@ nav {
 
 /* Hero Section */
 .hero-section {
-    height: 60vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 1rem;
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)),
+                url('graffiti-logo.png') center/contain no-repeat;
     position: relative;
     overflow: hidden;
 }
 
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, 
+                rgba(50, 205, 50, 0.1) 0%,
+                rgba(0, 0, 0, 0.95) 70%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid var(--accent-color);
+    box-shadow: 
+        0 0 30px rgba(50, 205, 50, 0.2),
+        0 0 60px rgba(50, 205, 50, 0.1);
+    backdrop-filter: blur(5px);
+}
+
 .hero-content h1 {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
     margin-bottom: 0.5rem;
     color: var(--text-color);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
     font-weight: 900;
+    text-shadow: 
+        0 0 20px rgba(50, 205, 50, 0.7),
+        0 0 40px rgba(50, 205, 50, 0.4);
+    -webkit-text-stroke: 2px var(--accent-color);
 }
 
 .hero-content h2 {
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     margin-bottom: 2rem;
     color: var(--accent-color);
     text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 6px;
+    text-shadow: 
+        0 0 10px rgba(50, 205, 50, 0.7),
+        0 0 20px rgba(50, 205, 50, 0.4);
 }
 
 .cta-button {
