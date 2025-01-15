@@ -3,13 +3,21 @@
 
 /* Base Styles */
 :root {
-    --primary-color: #000000;
+    --primary-color: rgba(0, 0, 0, 0.3);
     --accent-color: #1aff1a;
     --text-color: #ffffff;
-    --secondary-color: #0a0a0a;
+    --secondary-color: rgba(10, 10, 10, 0.3);
     --hover-color: #00ff00;
-    --gray-dark: #111111;
-    --gray-light: #999999;
+    --gray-dark: rgba(17, 17, 17, 0.3);
+    --gray-light: rgba(153, 153, 153, 0.9);
+    --panel-bg: rgba(0, 0, 0, 0.2);
+    --card-bg: rgba(0, 0, 0, 0.15);
+    --header-bg: rgba(0, 0, 0, 0.3);
+    --modal-bg: rgba(0, 0, 0, 0.4);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-left: env(safe-area-inset-left, 0px);
+    --safe-area-inset-right: env(safe-area-inset-right, 0px);
 }
 
 /* Base link styles */
@@ -19,6 +27,7 @@ a, a:link, a:visited, a:hover, a:active, a:focus {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     outline: none;
+    touch-action: manipulation;
 }
 
 * {
@@ -26,35 +35,49 @@ a, a:link, a:visited, a:hover, a:active, a:focus {
     padding: 0;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation;
+}
+
+/* Enable smooth scrolling but disable during touch events for better performance */
+@media (hover: hover) {
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--primary-color);
+    background-color: rgba(0, 0, 0, 0.1);
     color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: calc(var(--safe-area-inset-top)) calc(var(--safe-area-inset-right)) calc(var(--safe-area-inset-bottom)) calc(var(--safe-area-inset-left));
 }
 
-/* Header & Navigation */
+/* Header & Navigation - Mobile Optimized */
 header {
     position: fixed;
-    top: 0;
+    top: env(safe-area-inset-top, 0);
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--header-bg);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(26, 255, 26, 0.1);
+    padding: env(safe-area-inset-top) 0 0 0;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1rem;
     max-width: 1400px;
     margin: 0 auto;
+    height: 60px;
 }
 
 .logo {
@@ -78,18 +101,33 @@ nav {
     color: var(--accent-color);
 }
 
+/* Mobile Menu Improvements */
 .menu-toggle {
+    width: 44px; /* Minimum touch target size */
+    height: 44px;
     display: none;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     gap: 6px;
     cursor: pointer;
+    z-index: 1001;
+    margin-left: auto;
 }
 
-.menu-toggle span {
-    width: 30px;
-    height: 2px;
-    background-color: var(--text-color);
-    transition: all 0.3s ease;
+.nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: calc(60px + env(safe-area-inset-top));
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px - env(safe-area-inset-top));
+    background: var(--modal-bg);
+    padding: 2rem;
+    gap: 2rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Hero Section */
@@ -127,7 +165,9 @@ nav {
 /* Services Section */
 .services-section {
     padding: 6rem 2rem;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     position: relative;
     z-index: 2;
 }
@@ -152,7 +192,9 @@ nav {
 }
 
 .service-card {
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
     border: 1px solid rgba(26, 255, 26, 0.1);
     padding: 2.5rem;
     border-radius: 8px;
@@ -164,9 +206,16 @@ nav {
     justify-content: center;
     min-height: 300px;
     text-decoration: none;
+    min-height: auto;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 0.5rem;
+    touch-action: manipulation;
 }
 
 .service-card:hover {
+    background: rgba(0, 0, 0, 0.08);
     transform: translateY(-5px);
     box-shadow: 0 8px 32px rgba(26, 255, 26, 0.1);
     border-color: var(--accent-color);
@@ -203,9 +252,16 @@ nav {
     max-width: 800px;
     margin: 0 auto 3rem;
     padding: 1rem;
-    background: transparent;
-    border: none;
-    display: none; /* Hide the empty ad container */
+    background: var(--card-bg);
+    border: 1px solid rgba(26, 255, 26, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.ad-container:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 8px 32px rgba(26, 255, 26, 0.1);
 }
 
 @media (max-width: 1200px) {
@@ -256,7 +312,9 @@ nav {
 /* Products Section */
 .products-section {
     padding: 4rem 2rem;
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--panel-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: relative;
     z-index: 2;
 }
@@ -288,7 +346,9 @@ nav {
 }
 
 .product-card {
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--card-bg);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(26, 255, 26, 0.1);
     padding: 1rem;
     border-radius: 4px;
@@ -306,7 +366,7 @@ nav {
     height: 125px;
     object-fit: contain;
     border-radius: 2px;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.2);
     padding: 0.5rem;
     margin: 0 auto;
     display: block;
@@ -354,7 +414,9 @@ nav {
 /* Contact Section */
 .contact-section {
     padding: 6rem 2rem;
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--panel-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: relative;
     z-index: 2;
 }
@@ -377,7 +439,9 @@ nav {
 }
 
 .contact-card {
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--card-bg);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(26, 255, 26, 0.1);
     padding: 2rem;
     border-radius: 8px;
@@ -425,7 +489,9 @@ nav {
 /* Booking Section */
 .booking-section {
     padding: 6rem 2rem;
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--panel-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: relative;
     z-index: 2;
     text-align: center;
@@ -466,7 +532,9 @@ nav {
 /* Reviews Section */
 .reviews-section {
     padding: 6rem 2rem;
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--panel-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: relative;
     z-index: 2;
 }
@@ -486,7 +554,9 @@ nav {
 }
 
 .google-reviews {
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--card-bg);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(26, 255, 26, 0.1);
     padding: 3rem;
     border-radius: 8px;
@@ -533,7 +603,9 @@ nav {
 /* Notifications Section */
 .notifications-section {
     padding: 6rem 2rem;
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--panel-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: relative;
     z-index: 2;
 }
@@ -553,7 +625,9 @@ nav {
 }
 
 .notification-card {
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--card-bg);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(26, 255, 26, 0.1);
     padding: 3rem;
     border-radius: 8px;
@@ -592,18 +666,20 @@ nav {
 .form-group input {
     width: 100%;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.5);
     border: 1px solid rgba(26, 255, 26, 0.1);
     border-radius: 4px;
     color: var(--text-color);
     font-size: 1rem;
     transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .form-group input:focus {
     outline: none;
     border-color: var(--accent-color);
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .subscribe-button {
@@ -630,7 +706,9 @@ nav {
 /* QR Code Section */
 .qr-code-section {
     padding: 6rem 2rem;
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--panel-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: relative;
     z-index: 2;
     text-align: center;
@@ -645,10 +723,9 @@ nav {
 }
 
 .qr-code-container {
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--card-bg);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(26, 255, 26, 0.1);
     border-radius: 8px;
 }
@@ -661,7 +738,9 @@ nav {
 /* Footer */
 footer {
     padding: 2rem;
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--header-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-top: 1px solid rgba(26, 255, 26, 0.1);
     text-align: center;
 }
@@ -714,9 +793,10 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(26, 255, 26, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle at center, rgba(26, 255, 26, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
     pointer-events: none;
     z-index: 1;
+    opacity: 0.3;
 }
 
 .background-gallery {
@@ -726,7 +806,7 @@ footer {
     width: 100%;
     height: 100%;
     z-index: 0;
-    opacity: 0.2;
+    opacity: 0.08;
 }
 
 .gallery-grid {
@@ -757,28 +837,29 @@ footer {
     position: absolute;
     width: 150px;
     height: 150px;
-    background: radial-gradient(circle at center, rgba(26, 255, 26, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle at center, rgba(26, 255, 26, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
     border-radius: 50%;
     animation: float 20s infinite linear;
     transition: all 0.1s ease;
     mix-blend-mode: screen;
     will-change: transform, background;
+    opacity: 0.3;
 }
 
 @keyframes float {
     0% {
         transform: translateY(100vh) translateX(0) scale(1);
-        opacity: 0;
+        opacity: 0.1;
     }
     20% {
-        opacity: 1;
+        opacity: 0.3;
     }
     80% {
-        opacity: 1;
+        opacity: 0.3;
     }
     100% {
         transform: translateY(-100vh) translateX(100px) scale(2);
-        opacity: 0;
+        opacity: 0.1;
     }
 }
 
@@ -801,23 +882,6 @@ footer {
         width: 80px;
         height: 80px;
     }
-}
-
-/* Ad Container */
-.ad-container {
-    max-width: 800px;
-    margin: 0 auto 3rem;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.95);
-    border: 1px solid rgba(26, 255, 26, 0.1);
-    border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-}
-
-.ad-container:hover {
-    border-color: var(--accent-color);
-    box-shadow: 0 8px 32px rgba(26, 255, 26, 0.1);
 }
 
 /* Mobile Responsive Styles */
@@ -859,7 +923,7 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background: rgba(0, 0, 0, 0.95);
+        background: var(--modal-bg);
         padding: 1rem;
         border-top: 1px solid rgba(26, 255, 26, 0.1);
     }
@@ -958,77 +1022,133 @@ footer {
 /* Audio Player */
 .audio-player {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: max(20px, env(safe-area-inset-bottom));
+    right: max(20px, env(safe-area-inset-right));
     z-index: 99999999;
 }
 
 .music-button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(26, 255, 26, 0.15);
-    border: 2px solid rgba(26, 255, 26, 0.4);
-    color: #1aff1a;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 20px rgba(26, 255, 26, 0.3);
-    position: relative;
-    z-index: 99999999;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin: 0;
+    touch-action: manipulation;
 }
 
-.music-button:hover {
-    background: rgba(26, 255, 26, 0.25);
-    border-color: rgba(26, 255, 26, 0.6);
-    transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(26, 255, 26, 0.4);
+/* Mobile Alert Improvements */
+.mobile-alert {
+    position: fixed;
+    bottom: calc(80px + env(safe-area-inset-bottom));
+    right: max(15px, env(safe-area-inset-right));
+    background: var(--modal-bg);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 24px;
+    font-size: 14px;
+    z-index: 999999;
+    animation: fadeInOut 2s ease-in-out;
+    pointer-events: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
-.music-button.playing {
-    animation: pulse 2s infinite;
-    background: rgba(26, 255, 26, 0.25);
-}
-
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(26, 255, 26, 0.4);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(26, 255, 26, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(26, 255, 26, 0);
+/* Performance Optimizations */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
 
-/* Mobile optimization */
-@media screen and (max-width: 768px) {
-    .audio-player {
-        bottom: 80px;
-        right: 15px;
+.smoke {
+    will-change: transform, opacity;
+}
+
+/* Touch target size optimization */
+button,
+.nav-links a,
+.service-card,
+.product-card,
+.contact-card,
+input,
+.subscribe-button {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Loading optimizations */
+img {
+    content-visibility: auto;
+    loading: lazy;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .hero-content {
+        padding-top: calc(env(safe-area-inset-top) + 60px);
     }
-    
-    .music-button {
-        width: 45px;
-        height: 45px;
+
+    .services-grid,
+    .products-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
+    .service-card,
+    .product-card {
+        aspect-ratio: 1;
+        padding: 1.25rem;
+    }
+
+    .contact-info {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    section {
+        padding: 3rem 1rem;
+        padding-bottom: calc(3rem + env(safe-area-inset-bottom));
+    }
+
+    h2 {
+        font-size: 1.75rem !important;
+        letter-spacing: 4px !important;
+    }
+}
+
+/* Foldable device optimizations */
+@media (max-width: 280px) {
+    /* For ultra-narrow screens like Galaxy Fold */
+    .hero-content h1 {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+    }
+
+    .service-card,
+    .product-card {
+        padding: 1rem;
+        min-height: 200px;
+    }
+
+    .service-card i {
+        font-size: 1.5rem;
+    }
+
+    .service-card h3 {
         font-size: 1rem;
     }
+
+    .service-card .price {
+        font-size: 1.25rem;
+    }
 }
 
-/* Small screen optimization */
-@media screen and (max-width: 480px) {
-    .audio-player {
-        bottom: 70px;
-        right: 10px;
+/* Foldable device - unfolded state */
+@media (min-width: 717px) and (max-width: 720px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
-    
-    .music-button {
-        width: 40px;
-        height: 40px;
-        font-size: 0.9rem;
-    }
-} 
+}

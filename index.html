@@ -2,8 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="description" content="Professional barber services by Raul Ramirez III - Fades, Scissors Cuts, Beard Trims, and more in Grand Prairie, TX">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="HandheldFriendly" content="true">
     <title>Raul Ramirez III - Professional Barber Services</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -59,11 +65,10 @@
                 <h2>Professional Barber Services</h2>
                 <a href="https://booksy.com/en-us/1394013_raul-ramirez-iii_barber-shop_134276_grand-prairie" target="_blank" class="cta-button">Book Your Appointment</a>
                 <div class="audio-player">
-                    <audio id="background-music" loop>
+                    <audio id="bgMusic" preload="auto" loop playsinline webkit-playsinline>
                         <source src="audio/phonk-background.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
                     </audio>
-                    <button id="music-toggle" class="music-button">
+                    <button id="musicToggle" class="music-button" aria-label="Toggle music">
                         <i class="fas fa-volume-up"></i>
                     </button>
                 </div>
@@ -314,117 +319,223 @@
         </div>
 
         <script>
-            // Mobile menu toggle
-            const mobileMenu = document.getElementById('mobile-menu');
-            const navLinks = document.querySelector('.nav-links');
-            
-            mobileMenu.addEventListener('click', () => {
-                mobileMenu.classList.toggle('active');
-                navLinks.classList.toggle('active');
+            // Wait for DOM to be fully loaded
+            document.addEventListener('DOMContentLoaded', function() {
+                // Initialize all components
+                initAudioPlayer();
+                initMobileMenu();
+                initSmoothScroll();
+                initScrollToTop();
+                initParallax();
+                initNotificationForm();
+                initPhoneNumberFormatting();
+                initMobileOptimizations();
             });
 
-            // Close menu when clicking a link
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('active');
-                    navLinks.classList.remove('active');
-                });
-            });
+            // Mobile Optimizations
+            function initMobileOptimizations() {
+                // Prevent double-tap zoom on iOS
+                document.addEventListener('touchend', function(event) {
+                    event.preventDefault();
+                    event.target.click();
+                }, false);
 
-            // Smooth scrolling for internal links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
+                // Handle iOS/Android wake lock for audio
+                try {
+                    if (navigator.wakeLock) {
+                        navigator.wakeLock.request('screen').catch(console.error);
+                    }
+                } catch (err) {
+                    console.error('Wake Lock not supported:', err);
+                }
+            }
+
+            // Audio Player
+            function initAudioPlayer() {
+                const bgMusic = document.getElementById('bgMusic');
+                const musicToggle = document.getElementById('musicToggle');
+                const icon = musicToggle.querySelector('i');
+                let audioContext = null;
+                
+                bgMusic.volume = 0.5;
+
+                // Handle iOS/Android audio unlock
+                function unlockAudio() {
+                    if (!audioContext) {
+                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    }
+                    if (audioContext.state === 'suspended') {
+                        audioContext.resume();
+                    }
                     
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                    // Create empty buffer for mobile unlock
+                    const buffer = audioContext.createBuffer(1, 1, 22050);
+                    const source = audioContext.createBufferSource();
+                    source.buffer = buffer;
+                    source.connect(audioContext.destination);
+                    source.start(0);
+
+                    // Remove the event listeners once audio is unlocked
+                    document.removeEventListener('touchstart', unlockAudio);
+                    document.removeEventListener('touchend', unlockAudio);
+                    document.removeEventListener('click', unlockAudio);
+                }
+
+                // Add audio unlock listeners
+                document.addEventListener('touchstart', unlockAudio);
+                document.addEventListener('touchend', unlockAudio);
+                document.addEventListener('click', unlockAudio);
+
+                // Handle play/pause with better mobile support
+                musicToggle.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    if (bgMusic.paused) {
+                        // Play with mobile gesture handling
+                        const playPromise = bgMusic.play();
+                        if (playPromise !== undefined) {
+                            playPromise
+                                .then(() => {
+                                    icon.className = 'fas fa-volume-up';
+                                    musicToggle.classList.add('playing');
+                                })
+                                .catch(err => {
+                                    console.error('Playback failed:', err);
+                                    // Show mobile-friendly alert
+                                    const alertMsg = document.createElement('div');
+                                    alertMsg.className = 'mobile-alert';
+                                    alertMsg.textContent = 'Tap again to play music';
+                                    document.body.appendChild(alertMsg);
+                                    setTimeout(() => alertMsg.remove(), 2000);
+                                });
+                        }
+                    } else {
+                        bgMusic.pause();
+                        icon.className = 'fas fa-volume-mute';
+                        musicToggle.classList.remove('playing');
                     }
                 });
-            });
 
-            // Scroll to top button
-            const scrollBtn = document.querySelector('.scroll-to-top');
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    scrollBtn.classList.add('show');
-                } else {
-                    scrollBtn.classList.remove('show');
-                }
-            });
-
-            scrollBtn.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-
-            // Enhanced parallax effect
-            let ticking = false;
-            const parallaxBg = document.querySelector('.parallax-bg');
-            const servicesSection = document.querySelector('.services-section');
-
-            function updateParallax() {
-                if (!parallaxBg || !servicesSection) return;
-
-                const isMobile = window.innerWidth <= 768;
-                const rect = servicesSection.getBoundingClientRect();
-                const isInView = rect.top < window.innerHeight && rect.bottom > 0;
-
-                if (isInView) {
-                    const scrolled = window.pageYOffset;
-                    const speed = isMobile ? 0.3 : 0.5;
-                    const yPos = isMobile ? scrolled * speed : (rect.top * speed);
-                    
-                    parallaxBg.style.transform = `translate3d(0, ${yPos}px, 0)`;
-                }
-
-                ticking = false;
-            }
-
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        updateParallax();
+                // Handle audio state changes
+                ['play', 'pause', 'ended'].forEach(event => {
+                    bgMusic.addEventListener(event, () => {
+                        icon.className = bgMusic.paused ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+                        musicToggle.classList.toggle('playing', !bgMusic.paused);
                     });
-                    ticking = true;
-                }
-            });
+                });
 
-            window.addEventListener('resize', updateParallax);
-            updateParallax();
+                // Handle page visibility changes
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden && !bgMusic.paused) {
+                        bgMusic.pause();
+                    }
+                });
 
-            // Notification form handling
-            const notificationForm = document.getElementById('notification-form');
-            if (notificationForm) {
-                notificationForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const name = document.getElementById('name').value;
-                    const phone = document.getElementById('phone').value;
-                    
-                    // Format phone number
-                    const formattedPhone = phone.replace(/\D/g, '');
-                    
-                    // Here you would typically send this data to your backend
-                    console.log('Subscription data:', { name, phone: formattedPhone });
-                    
-                    // Show success message
-                    alert('Thanks for subscribing! You will receive text notifications for updates.');
-                    
-                    // Clear form
-                    notificationForm.reset();
+                // Handle mobile audio interruptions
+                bgMusic.addEventListener('suspend', () => {
+                    if (!bgMusic.paused) {
+                        bgMusic.play().catch(() => {});
+                    }
                 });
             }
 
-            // Phone number formatting
-            const phoneInput = document.getElementById('phone');
-            if (phoneInput) {
+            // Mobile Menu
+            function initMobileMenu() {
+                const mobileMenu = document.getElementById('mobile-menu');
+                const navLinks = document.querySelector('.nav-links');
+                
+                mobileMenu.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    });
+                });
+            }
+
+            // Smooth Scrolling
+            function initSmoothScroll() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(this.getAttribute('href'));
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    });
+                });
+            }
+
+            // Scroll to Top
+            function initScrollToTop() {
+                const scrollBtn = document.querySelector('.scroll-to-top');
+                
+                window.addEventListener('scroll', () => {
+                    scrollBtn.classList.toggle('show', window.pageYOffset > 300);
+                });
+
+                scrollBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Parallax Effect
+            function initParallax() {
+                const parallaxBg = document.querySelector('.parallax-bg');
+                const servicesSection = document.querySelector('.services-section');
+                let ticking = false;
+
+                function updateParallax() {
+                    if (!parallaxBg || !servicesSection) return;
+
+                    const isMobile = window.innerWidth <= 768;
+                    const rect = servicesSection.getBoundingClientRect();
+                    
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        const speed = isMobile ? 0.3 : 0.5;
+                        const yPos = isMobile ? window.pageYOffset * speed : rect.top * speed;
+                        parallaxBg.style.transform = `translate3d(0, ${yPos}px, 0)`;
+                    }
+                    ticking = false;
+                }
+
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(updateParallax);
+                        ticking = true;
+                    }
+                });
+
+                window.addEventListener('resize', updateParallax);
+                updateParallax();
+            }
+
+            // Notification Form
+            function initNotificationForm() {
+                const form = document.getElementById('notification-form');
+                if (!form) return;
+
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('name').value;
+                    const phone = document.getElementById('phone').value.replace(/\D/g, '');
+                    
+                    console.log('Subscription data:', { name, phone });
+                    alert('Thanks for subscribing! You will receive text notifications for updates.');
+                    form.reset();
+                });
+            }
+
+            // Phone Number Formatting
+            function initPhoneNumberFormatting() {
+                const phoneInput = document.getElementById('phone');
+                if (!phoneInput) return;
+
                 phoneInput.addEventListener('input', function(e) {
                     let value = e.target.value.replace(/\D/g, '');
                     if (value.length > 0) {
@@ -440,135 +551,16 @@
                 });
             }
 
-            // QR Code generation
-            window.onload = function() {
+            // QR Code
+            window.addEventListener('load', function() {
                 new QRCode(document.getElementById("qrcode"), {
                     text: window.location.href,
                     width: 200,
                     height: 200,
-                    colorDark : "#1aff1a",
-                    colorLight : "#000000",
-                    correctLevel : QRCode.CorrectLevel.H
+                    colorDark: "#1aff1a",
+                    colorLight: "#000000",
+                    correctLevel: QRCode.CorrectLevel.H
                 });
-            };
-
-            // Audio Visualizer Setup
-            let audioContext;
-            let analyser;
-            let dataArray;
-            const smokeElements = document.querySelectorAll('.smoke');
-            
-            function initAudioVisualizer() {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                analyser = audioContext.createAnalyser();
-                const audioElement = document.getElementById('background-music');
-                const source = audioContext.createMediaElementSource(audioElement);
-                
-                analyser.connect(audioContext.destination);
-                source.connect(analyser);
-                
-                analyser.fftSize = 256;
-                const bufferLength = analyser.frequencyBinCount;
-                dataArray = new Uint8Array(bufferLength);
-                
-                // Start the animation
-                visualize();
-            }
-            
-            function visualize() {
-                requestAnimationFrame(visualize);
-                analyser.getByteFrequencyData(dataArray);
-                
-                // Calculate average frequency
-                const average = dataArray.reduce((a, b) => a + b) / dataArray.length;
-                
-                // Update smoke elements based on audio
-                smokeElements.forEach((smoke, index) => {
-                    const scale = 1 + (average / 255);
-                    const hue = (average + index * 30) % 360;
-                    const opacity = 0.1 + (average / 512);
-                    
-                    smoke.style.transform = `scale(${scale})`;
-                    smoke.style.background = `radial-gradient(circle at center, 
-                        hsla(${hue}, 100%, 50%, ${opacity}) 0%, 
-                        rgba(0, 0, 0, 0) 70%)`;
-                });
-            }
-
-            document.addEventListener('DOMContentLoaded', function() {
-                const musicToggle = document.getElementById('music-toggle');
-                const backgroundMusic = document.getElementById('background-music');
-                const volumeIcon = musicToggle.querySelector('i');
-                let audioContext = null;
-                let analyser = null;
-
-                // Set initial volume
-                backgroundMusic.volume = 0.5;
-
-                // Function to initialize audio context
-                function initAudioContext() {
-                    if (!audioContext) {
-                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                        analyser = audioContext.createAnalyser();
-                        const source = audioContext.createMediaElementSource(backgroundMusic);
-                        source.connect(analyser);
-                        analyser.connect(audioContext.destination);
-                        analyser.fftSize = 256;
-                    }
-                    if (audioContext.state === 'suspended') {
-                        audioContext.resume();
-                    }
-                }
-
-                // Function to handle music toggle
-                async function toggleMusic() {
-                    try {
-                        if (!audioContext) {
-                            await initAudioContext();
-                        }
-
-                        if (backgroundMusic.paused) {
-                            await backgroundMusic.play();
-                            volumeIcon.className = 'fas fa-volume-up';
-                            musicToggle.classList.add('playing');
-                            visualize();
-                        } else {
-                            backgroundMusic.pause();
-                            volumeIcon.className = 'fas fa-volume-mute';
-                            musicToggle.classList.remove('playing');
-                        }
-                    } catch (error) {
-                        console.error('Audio playback error:', error);
-                        alert('Please click again to start music. This is required by your browser for a better experience.');
-                    }
-                }
-
-                // Function to create visualization effect
-                function visualize() {
-                    if (!analyser || !audioContext || backgroundMusic.paused) return;
-
-                    const bufferLength = analyser.frequencyBinCount;
-                    const dataArray = new Uint8Array(bufferLength);
-                    analyser.getByteFrequencyData(dataArray);
-
-                    // Calculate average frequency
-                    const average = dataArray.reduce((a, b) => a + b) / bufferLength;
-                    
-                    // Update smoke elements based on music
-                    const smokeElements = document.querySelectorAll('.smoke');
-                    smokeElements.forEach(smoke => {
-                        const scale = 1 + (average / 512);
-                        const hue = 120 + (average / 2);
-                        smoke.style.transform = `scale(${scale})`;
-                        smoke.style.filter = `hue-rotate(${hue}deg)`;
-                        smoke.style.opacity = 0.3 + (average / 512);
-                    });
-
-                    requestAnimationFrame(visualize);
-                }
-
-                // Add click event listener
-                musicToggle.addEventListener('click', toggleMusic);
             });
         </script>
     </main>
